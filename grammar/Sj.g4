@@ -14,32 +14,53 @@ identifier : ID;
 // declaration syntax
 declarations : ( declaration ';' )*;
 declaration  : type vars ';' ;
+
 type         : INT | FLOAT | STRING | BOOL;
-vars         : ((identifier ',' vars) | identifier) ;
+vars         : identifier ( ',' vars )* ;
 
 // instuctions syntax
 instructions    : ( instruction ';')*;
-instruction     : affectation | ifStatement;
+instruction     : affectation | ifStatement | functionCall;
 
-affectation     : identifier '=' (expr | val);
+affectation     : identifier '=' (expression | val);
 
 ifStatement     : ifStat elseIfStat* elseStat?  ;
-ifStat          : If '(' expression ')' '{' instructions '}';
-elseIfStat      : ElIf '(' expression ')' '{' instructions '}';
-elseStat        : Else '{' block '}';
+ifStat          : IF '(' expression ')' '{' instructions '}';
+elseIfStat      : ELSE_IF '(' expression ')' '{' instructions '}';
+elseStat        : ELSE '{' instructions '}';
 
 
-functionCall    : identifier '(' exprList? ')'  #identifierFunctionCall
-                | PRINT '(' expression ')'      #printFunctionCall
-                | SCAN '(' expression ')'       #scanFunctionCall;
+functionCall    : function=identifier '(' exprList? ')'                     #identifierFunctionCall
+                | function=('print'|'scan') '(' STRING_VAL ',' exprList ')' #ioFunctionCall
+                ;
 
 exprList        : expression ( ',' expression )* ;
 
-expr            : '(' expr ')'                      #parenExpr
-                | left=expr op=('*'|'/') right=expr #opExpr
-                | left=expr op=('+'|'-') right=expr #opExpr
-                | atom=INT                          #atomExpr
+expression      : intExpr | floatExpr
+                | '(' expression ')'
                 ;
+
+intExpr         : INTEGER_VAL
+                | intArthExpr | intCompExpr | intArthExpr
+                ;
+intArthExpr     : ( intArthExpr | INTEGER_VAL )   op=( '*' | '/' )    ( intArthExpr | INTEGER_VAL )     #multIntArthExpr
+                | ( intArthExpr | INTEGER_VAL )   op=( '+' | '-' )    ( intArthExpr | INTEGER_VAL )     #addIntArthExpr
+                ;
+intCompExpr     : ( intArthExpr | intCompExpr | INTEGER_VAL )   op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( intArthExpr | intCompExpr | INTEGER_VAL );
+intLogicExpr    : ('!')?  intLogicExpr  | ( '(' intLogicExpr ')')
+                | ( intLogicExpr | intArthExpr | intCompExpr | INTEGER_VAL )   op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( intLogicExpr | intArthExpr | intCompExpr | INTEGER_VAL );
+
+floatExpr       : INTEGER_VAL
+                | floatArthExpr | floatCompExpr | floatLogicExpr
+                ;
+floatArthExpr   : ( floatArthExpr | FLOAT_VAL )   op=( '*' | '/' )    ( floatArthExpr | FLOAT_VAL )
+                | ( floatArthExpr | FLOAT_VAL )   op=( '+' | '-' )    ( floatArthExpr | FLOAT_VAL )
+                ;
+floatCompExpr   : ( intArthExpr | intCompExpr | FLOAT_VAL )     op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( intArthExpr | intCompExpr | INTEGER_VAL );
+
+floatLogicExpr  : ('!')? ( (intLogicExpr | floatLogicExpr) | ( '(' intLogicExpr | floatLogicExpr ')'))
+                | ( floatLogicExpr | intArthExpr | intCompExpr | FLOAT_VAL )     op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( floatLogicExpr | intArthExpr | intCompExpr | FLOAT_VAL );
+
 
 val             : INTEGER_VAL | FLOAT_VAL | STRING_VAL | BOOL_VAL;
 
@@ -61,6 +82,10 @@ BOOL_VAL    : 'true' | 'false';
 
 //keywords
 MODIFICATOR : 'public' | 'protected';
+
+IF      : 'if';
+ELSE_IF : 'elif';
+ELSE    : 'else';
 
 PRINT   : 'print';
 SCAN    : 'scan';
