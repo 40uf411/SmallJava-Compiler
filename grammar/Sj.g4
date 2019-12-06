@@ -7,7 +7,7 @@ imports : import_* ;
 import_ : ('import' identifier ';');
 
 // modificators syntax
-modificator :  'public' | 'protected' ;
+modificator :  MODIFICATOR ;
 
 identifier : ID;
 
@@ -19,12 +19,28 @@ vars         : ((identifier ',' vars) | identifier) ;
 
 // instuctions syntax
 instructions    : ( instruction ';')*;
-instruction     : identifier '=' (expr | val);
+instruction     : affectation | ifStatement;
+
+affectation     : identifier '=' (expr | val);
+
+ifStatement     : ifStat elseIfStat* elseStat?  ;
+ifStat          : If '(' expression ')' '{' instructions '}';
+elseIfStat      : ElIf '(' expression ')' '{' instructions '}';
+elseStat        : Else '{' block '}';
+
+
+functionCall    : identifier '(' exprList? ')'  #identifierFunctionCall
+                | PRINT '(' expression ')'      #printFunctionCall
+                | SCAN '(' expression ')'       #scanFunctionCall;
+
+exprList        : expression ( ',' expression )* ;
+
 expr            : '(' expr ')'                      #parenExpr
                 | left=expr op=('*'|'/') right=expr #opExpr
                 | left=expr op=('+'|'-') right=expr #opExpr
                 | atom=INT                          #atomExpr
                 ;
+
 val             : INTEGER_VAL | FLOAT_VAL | STRING_VAL | BOOL_VAL;
 
 // data types
@@ -42,6 +58,13 @@ FLOAT_VAL   : INTEGER_VAL ('.'[0-9]*) ;
 STRING_VAL  : ["] ( ~["\r\n\\] | '\\' ~[\r\n] )* ["]
             | ['] ( ~['\r\n\\] | '\\' ~[\r\n] )* ['] ;
 BOOL_VAL    : 'true' | 'false';
+
+//keywords
+MODIFICATOR : 'public' | 'protected';
+
+PRINT   : 'print';
+SCAN    : 'scan';
+
 
 // ignoring the comments and the whitespaces
 COMMENT : ( '//' ~[\r\n]* | '/*' .*? '*/' ) -> skip ;
