@@ -1,8 +1,9 @@
-import test;
-import gogo;
-public class_SJ NomDeClasse
-{
-   main_SJ
-         {
-         }
-}
+import foo;
+import bar;
+
+protected class_SJ Compil {
+    int a,n,a;
+    float f;
+    main_SJ {
+    }
+};

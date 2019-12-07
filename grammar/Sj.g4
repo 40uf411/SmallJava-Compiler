@@ -7,68 +7,82 @@ imports : import_* ;
 import_ : ('import' identifier ';');
 
 // modificators syntax
-modificator :  MODIFICATOR ;
+modificator : 'public'
+            | 'protected'
+            ;
 
 identifier : ID;
 
 // declaration syntax
 declarations : ( declaration ';' )*;
-declaration  : type vars ';' ;
+declaration  : type vars ;
 
-type         : INT | FLOAT | STRING | BOOL;
+type         : INT | FLOAT | STRING;
 vars         : identifier ( ',' vars )* ;
 
 // instuctions syntax
-instructions    : ( instruction ';')*;
-instruction     : affectation | ifStatement | functionCall;
+instructions    : instruction *;
+instruction     : ifStatement | ( affectation ';' ) | ( functionCall ';' );
 
-affectation     : identifier '=' (expression | val);
+// affectation syntax
+affectation     : identifier '=' (expression |  (INTEGER_VAL | FLOAT_VAL | STRING_VAL) );
 
+// if statment syntax
 ifStatement     : ifStat elseIfStat* elseStat?  ;
-ifStat          : IF '(' expression ')' '{' instructions '}';
-elseIfStat      : ELSE_IF '(' expression ')' '{' instructions '}';
+ifStat          : IF '(' ( intLogicExpr | floatLogicExpr ) ')' '{' instructions '}';
+elseIfStat      : ELSE_IF '(' ( intLogicExpr | floatLogicExpr ) ')' '{' instructions '}';
 elseStat        : ELSE '{' instructions '}';
 
-
+// function call syntax
 functionCall    : function=identifier '(' exprList? ')'                     #identifierFunctionCall
                 | function=('print'|'scan') '(' STRING_VAL ',' exprList ')' #ioFunctionCall
                 ;
 
+// list of expressions syntax
 exprList        : expression ( ',' expression )* ;
 
+// expression syntax
 expression      : intExpr | floatExpr
                 | '(' expression ')'
+                | intExpr
+                | floatExpr
+                | STRING_VAL
                 ;
 
-intExpr         : INTEGER_VAL
+// int expression syntax
+intExpr         : INTEGER_VAL | identifier
                 | intArthExpr | intCompExpr | intArthExpr
                 ;
-intArthExpr     : ( intArthExpr | INTEGER_VAL )   op=( '*' | '/' )    ( intArthExpr | INTEGER_VAL )     #multIntArthExpr
-                | ( intArthExpr | INTEGER_VAL )   op=( '+' | '-' )    ( intArthExpr | INTEGER_VAL )     #addIntArthExpr
+// int arithmetic expressions syntax
+intArthExpr     : ( '(' intArthExpr ')' | INTEGER_VAL | identifier )   op=( '*' | '/' )    ( '(' intArthExpr ')' | INTEGER_VAL | identifier )     #multIntArthExpr
+                | ( '(' intArthExpr ')' | INTEGER_VAL | identifier )   op=( '+' | '-' )    ( '(' intArthExpr ')' | INTEGER_VAL | identifier )     #addIntArthExpr
                 ;
-intCompExpr     : ( intArthExpr | intCompExpr | INTEGER_VAL )   op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( intArthExpr | intCompExpr | INTEGER_VAL );
-intLogicExpr    : ('!')?  intLogicExpr  | ( '(' intLogicExpr ')')
-                | ( intLogicExpr | intArthExpr | intCompExpr | INTEGER_VAL )   op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( intLogicExpr | intArthExpr | intCompExpr | INTEGER_VAL );
+// int comparision expressions syntax
+intCompExpr     : ( '(' intArthExpr ')' | '(' intCompExpr ')' | INTEGER_VAL | identifier )   op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( '(' intArthExpr ')' | '(' intCompExpr ')' | INTEGER_VAL | identifier );
+// int logical expressions syntax
+intLogicExpr    : ('!')? ( ( '(' intLogicExpr ')')
+                           | ( '(' intLogicExpr | '(' intArthExpr ')' | '(' intCompExpr ')' | INTEGER_VAL | identifier )   op=( '&&' | '||' )    ( intLogicExpr | '(' intArthExpr ')' | '(' intCompExpr ')' | INTEGER_VAL | identifier )
+                         );
 
-floatExpr       : INTEGER_VAL
+// float expression syntax
+floatExpr       : FLOAT_VAL | identifier
                 | floatArthExpr | floatCompExpr | floatLogicExpr
                 ;
-floatArthExpr   : ( floatArthExpr | FLOAT_VAL )   op=( '*' | '/' )    ( floatArthExpr | FLOAT_VAL )
-                | ( floatArthExpr | FLOAT_VAL )   op=( '+' | '-' )    ( floatArthExpr | FLOAT_VAL )
+// float arithmetic expressions syntax
+floatArthExpr   : ( '(' floatArthExpr ')' | FLOAT_VAL | identifier )   op=( '*' | '/' )    ( '(' floatArthExpr ')' | FLOAT_VAL | identifier )
+                | ( '(' floatArthExpr ')' | FLOAT_VAL | identifier )   op=( '+' | '-' )    ( '(' floatArthExpr ')' | FLOAT_VAL | identifier )
                 ;
-floatCompExpr   : ( intArthExpr | intCompExpr | FLOAT_VAL )     op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( intArthExpr | intCompExpr | INTEGER_VAL );
-
-floatLogicExpr  : ('!')? ( (intLogicExpr | floatLogicExpr) | ( '(' intLogicExpr | floatLogicExpr ')'))
-                | ( floatLogicExpr | intArthExpr | intCompExpr | FLOAT_VAL )     op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( floatLogicExpr | intArthExpr | intCompExpr | FLOAT_VAL );
-
-
-val             : INTEGER_VAL | FLOAT_VAL | STRING_VAL | BOOL_VAL;
+// float comparision expressions syntax
+floatCompExpr   : ( '(' floatCompExpr ')' | '(' floatArthExpr ')' | FLOAT_VAL | identifier )     op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( '(' floatCompExpr ')' | '(' floatArthExpr ')' | FLOAT_VAL | identifier );
+// int logical expressions syntax
+floatLogicExpr  :  ('!')? ( ( '(' floatLogicExpr ')')
+                            | ( '(' floatLogicExpr | '(' floatArthExpr ')' | '(' floatCompExpr ')' | INTEGER_VAL | identifier )   op=( '&&' | '||' )    ( floatLogicExpr | '(' floatArthExpr ')' | '(' floatCompExpr ')' | FLOAT_VAL | identifier )
+                          );
 
 // data types
 INT     : 'int';
 FLOAT   : 'float';
 STRING  : 'String';
-BOOL    : 'bool';
 
 // identifier syntaxs
 ID : [a-zA-Z][a-zA-Z0-9]*;
