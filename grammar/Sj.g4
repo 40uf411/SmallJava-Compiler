@@ -1,6 +1,6 @@
 grammar Sj;
 // main shape of SmallJava code.
-start: imports modificator 'class_SJ' identifier '{' declarations  'main_SJ' '{' instructions  '}' ;
+start: imports modificator 'class' identifier '{' declarations  'main' '{' instructions  '}' ;
 
 // importing libreries syntax (ex: import foo; import bar;...)
 imports : import_* ;
@@ -24,60 +24,83 @@ vars         : identifier ( ',' vars )* ;
 instructions    : instruction *;
 instruction     : ifStatement | ( affectation ';' ) | ( functionCall ';' );
 
-// affectation syntax
-affectation     : identifier '=' (expression |  (INTEGER_VAL | FLOAT_VAL | STRING_VAL) );
-
 // if statment syntax
 ifStatement     : ifStat elseIfStat* elseStat?  ;
-ifStat          : IF '(' ( intLogicExpr | floatLogicExpr ) ')' '{' instructions '}';
-elseIfStat      : ELSE_IF '(' ( intLogicExpr | floatLogicExpr ) ')' '{' instructions '}';
-elseStat        : ELSE '{' instructions '}';
+ifStat          : 'Si' '(' ifCondition ')' 'Alors' '{' instructions '}';
+elseIfStat      : 'Sinon Si' '(' ifCondition ')' 'Alors' '{' instructions '}';
+elseStat        : 'Sinon' '{' instructions '}';
+ifCondition     : intExpr | floatExpr ;
+
+bool            :  BOOL_T | BOOL_F ;
+val             : INTEGER_VAL | FLOAT_VAL | STRING_VAL ;
+// affectation syntax
+affectation     : identifier '=' ( expression |  val );
 
 // function call syntax
-functionCall    : function=identifier '(' exprList? ')'                     #identifierFunctionCall
-                | function=('print'|'scan') '(' STRING_VAL ',' exprList ')' #ioFunctionCall
-                ;
+functionCall    : function=identifier '(' exprList? ')' #identifierFunctionCall ;
 
 // list of expressions syntax
 exprList        : expression ( ',' expression )* ;
 
 // expression syntax
-expression      : intExpr | floatExpr
-                | '(' expression ')'
-                | intExpr
-                | floatExpr
-                | STRING_VAL
-                ;
+expression      : functionCall | intExpr | floatExpr | val | identifier;
 
 // int expression syntax
-intExpr         : INTEGER_VAL | identifier
-                | intArthExpr | intCompExpr | intArthExpr
+intExpr         : intArthExpr | intCompExpr | intLogicExpr
                 ;
 // int arithmetic expressions syntax
-intArthExpr     : ( '(' intArthExpr ')' | INTEGER_VAL | identifier )   op=( '*' | '/' )    ( '(' intArthExpr ')' | INTEGER_VAL | identifier )     #multIntArthExpr
-                | ( '(' intArthExpr ')' | INTEGER_VAL | identifier )   op=( '+' | '-' )    ( '(' intArthExpr ')' | INTEGER_VAL | identifier )     #addIntArthExpr
+intCondAtom     : '(' intCondAtom ')'
+                | INTEGER_VAL | identifier
+                ;
+intArthExpr     : '(' intArthExpr ')' #parenIntArthExpr
+                | intCondAtom           op=( '*' | '/' )    (  intArthExpr  | intCondAtom )     #multIntArthExpr
+                | intArthExpr           op=( '*' | '/' )    (  intArthExpr  | intCondAtom )     #multIntArthExpr
+                | intCondAtom           op=( '+' | '-' )    ( intArthExpr  | intCondAtom )     #addIntArthExpr
+                | intArthExpr           op=( '+' | '-' )    ( intArthExpr  | intCondAtom )     #addIntArthExpr
                 ;
 // int comparision expressions syntax
-intCompExpr     : ( '(' intArthExpr ')' | '(' intCompExpr ')' | INTEGER_VAL | identifier )   op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( '(' intArthExpr ')' | '(' intCompExpr ')' | INTEGER_VAL | identifier );
+intCompExpr     : '(' intCompExpr ')'
+                | intCondAtom           op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( intCondAtom | intCompExpr | intArthExpr )
+                | intCompExpr           op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( intCondAtom | intCompExpr | intArthExpr )
+                | intArthExpr           op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( intCondAtom | intCompExpr | intArthExpr )
+                ;
 // int logical expressions syntax
-intLogicExpr    : ('!')? ( ( '(' intLogicExpr ')')
-                           | ( '(' intLogicExpr | '(' intArthExpr ')' | '(' intCompExpr ')' | INTEGER_VAL | identifier )   op=( '&&' | '||' )    ( intLogicExpr | '(' intArthExpr ')' | '(' intCompExpr ')' | INTEGER_VAL | identifier )
-                         );
+intLogicExpr    : '!' intLogicExpr
+                | '(' intLogicExpr ')'
+                | intCondAtom           op=( '&&' | '||' )    ( intLogicExpr | intCondAtom | intCompExpr | intArthExpr )
+                | intLogicExpr          op=( '&&' | '||' )    ( intLogicExpr | intCondAtom | intCompExpr | intArthExpr )
+                | intCompExpr           op=( '&&' | '||' )    ( intLogicExpr | intCondAtom | intCompExpr | intArthExpr )
+                | intArthExpr           op=( '&&' | '||' )    ( intLogicExpr | intCondAtom | intCompExpr | intArthExpr )
+                ;
 
 // float expression syntax
-floatExpr       : FLOAT_VAL | identifier
-                | floatArthExpr | floatCompExpr | floatLogicExpr
+
+floatExpr       : floatArthExpr | floatCompExpr | floatLogicExpr
+                ;
+floatCondAtom   : '(' floatCondAtom ')'
+                | FLOAT_VAL | identifier
                 ;
 // float arithmetic expressions syntax
-floatArthExpr   : ( '(' floatArthExpr ')' | FLOAT_VAL | identifier )   op=( '*' | '/' )    ( '(' floatArthExpr ')' | FLOAT_VAL | identifier )
-                | ( '(' floatArthExpr ')' | FLOAT_VAL | identifier )   op=( '+' | '-' )    ( '(' floatArthExpr ')' | FLOAT_VAL | identifier )
+floatArthExpr   : '(' floatArthExpr ')' #parenFloatArthExpr
+                | floatCondAtom           op=( '*' | '/' )    (  floatArthExpr  | floatCondAtom )     #multFloatArthExpr
+                | floatArthExpr           op=( '*' | '/' )    (  floatArthExpr  | floatCondAtom )     #multFloatArthExpr
+                | floatCondAtom           op=( '+' | '-' )    (  floatArthExpr  | floatCondAtom )     #addFloatArthExpr
+                | floatArthExpr           op=( '+' | '-' )    (  floatArthExpr  | floatCondAtom )     #addFloatArthExpr
                 ;
 // float comparision expressions syntax
-floatCompExpr   : ( '(' floatCompExpr ')' | '(' floatArthExpr ')' | FLOAT_VAL | identifier )     op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( '(' floatCompExpr ')' | '(' floatArthExpr ')' | FLOAT_VAL | identifier );
+floatCompExpr   : '(' floatCompExpr ')'
+                | floatCondAtom           op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( floatCondAtom | floatCompExpr | floatArthExpr )
+                | floatCompExpr           op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( floatCondAtom | floatCompExpr | floatArthExpr )
+                | floatArthExpr           op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( floatCondAtom | floatCompExpr | floatArthExpr )
+                ;
 // int logical expressions syntax
-floatLogicExpr  :  ('!')? ( ( '(' floatLogicExpr ')')
-                            | ( '(' floatLogicExpr | '(' floatArthExpr ')' | '(' floatCompExpr ')' | INTEGER_VAL | identifier )   op=( '&&' | '||' )    ( floatLogicExpr | '(' floatArthExpr ')' | '(' floatCompExpr ')' | FLOAT_VAL | identifier )
-                          );
+floatLogicExpr  : '!' floatLogicExpr
+                | '(' floatLogicExpr ')'
+                | floatCondAtom           op=( '&&' | '||' )    ( floatLogicExpr | floatCondAtom | floatCompExpr | floatArthExpr )
+                | floatLogicExpr          op=( '&&' | '||' )    ( floatLogicExpr | floatCondAtom | floatCompExpr | floatArthExpr )
+                | floatCompExpr           op=( '&&' | '||' )    ( floatLogicExpr | floatCondAtom | floatCompExpr | floatArthExpr )
+                | floatArthExpr           op=( '&&' | '||' )    ( floatLogicExpr | floatCondAtom | floatCompExpr | floatArthExpr )
+                ;
 
 // data types
 INT     : 'int';
@@ -92,10 +115,10 @@ INTEGER_VAL : [+-]?[1-9][0-9]* ;
 FLOAT_VAL   : INTEGER_VAL ('.'[0-9]*) ;
 STRING_VAL  : ["] ( ~["\r\n\\] | '\\' ~[\r\n] )* ["]
             | ['] ( ~['\r\n\\] | '\\' ~[\r\n] )* ['] ;
-BOOL_VAL    : 'true' | 'false';
+BOOL_T    : 'true' ;
+BOOL_F      : 'false';
 
 //keywords
-MODIFICATOR : 'public' | 'protected';
 
 IF      : 'if';
 ELSE_IF : 'elif';
