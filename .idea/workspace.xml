@@ -74,16 +74,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Sj.g4" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Sj.g4" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grammar/Sj.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="833">
-              <caret line="96" column="16" lean-forward="false" selection-start-line="96" selection-start-column="16" selection-end-line="96" selection-end-column="16" />
+            <state relative-caret-position="314">
+              <caret line="150" column="0" lean-forward="false" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
               <folding>
-                <element signature="e#1675#2235#1" expanded="false" />
-                <element signature="e#2235#2721#1" expanded="false" />
-                <element signature="e#3547#4147#1" expanded="false" />
+                <element signature="e#1623#1911#1" expanded="false" />
+                <element signature="e#1911#2097#1" expanded="false" />
+                <element signature="e#2097#2284#1" expanded="false" />
+                <element signature="e#2642#3454#1" expanded="false" />
+                <element signature="e#3454#4073#1" expanded="false" />
+                <element signature="e#4073#4805#1" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Mu.g4" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grammar/Mu.g4">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1565">
+              <caret line="117" column="5" lean-forward="true" selection-start-line="117" selection-start-column="5" selection-end-line="117" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -92,7 +105,7 @@
         <entry file="file://$PROJECT_DIR$/input.sj">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
-              <caret line="10" column="2" lean-forward="false" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
+              <caret line="10" column="2" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -101,7 +114,7 @@
       <file leaf-file-name="Test.g4" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grammar/Test.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="681">
+            <state relative-caret-position="1207">
               <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="79" selection-end-column="9" />
               <folding />
             </state>
@@ -172,18 +185,13 @@
               <item name="SmallJava" type="462c0819:PsiDirectoryNode" />
               <item name="grammar" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="SmallJava" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SmallJava" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -257,12 +265,12 @@
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <layout>
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14321926" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14321926" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Tool Output" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42297298" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36081082" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -285,14 +293,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Quad.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Quads.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -330,9 +330,12 @@
         <state relative-caret-position="1156">
           <caret line="68" column="75" lean-forward="false" selection-start-line="68" selection-start-column="75" selection-end-line="68" selection-end-column="75" />
           <folding>
-            <element signature="e#1675#2235#1" expanded="false" />
-            <element signature="e#2235#2721#1" expanded="false" />
-            <element signature="e#3547#4147#1" expanded="false" />
+            <element signature="e#1623#1911#1" expanded="false" />
+            <element signature="e#1911#2097#1" expanded="false" />
+            <element signature="e#2097#2284#1" expanded="false" />
+            <element signature="e#2642#3454#1" expanded="false" />
+            <element signature="e#3454#4073#1" expanded="false" />
+            <element signature="e#4073#4805#1" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -408,9 +411,12 @@
         <state relative-caret-position="1122">
           <caret line="66" column="56" lean-forward="false" selection-start-line="66" selection-start-column="56" selection-end-line="66" selection-end-column="56" />
           <folding>
-            <element signature="e#1675#2235#1" expanded="false" />
-            <element signature="e#2235#2721#1" expanded="false" />
-            <element signature="e#3547#4147#1" expanded="false" />
+            <element signature="e#1623#1911#1" expanded="false" />
+            <element signature="e#1911#2097#1" expanded="false" />
+            <element signature="e#2097#2284#1" expanded="false" />
+            <element signature="e#2642#3454#1" expanded="false" />
+            <element signature="e#3454#4073#1" expanded="false" />
+            <element signature="e#4073#4805#1" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -486,9 +492,12 @@
         <state relative-caret-position="612">
           <caret line="36" column="50" lean-forward="false" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="50" />
           <folding>
-            <element signature="e#1675#2235#1" expanded="false" />
-            <element signature="e#2235#2721#1" expanded="false" />
-            <element signature="e#3547#4147#1" expanded="false" />
+            <element signature="e#1623#1911#1" expanded="false" />
+            <element signature="e#1911#2097#1" expanded="false" />
+            <element signature="e#2097#2284#1" expanded="false" />
+            <element signature="e#2642#3454#1" expanded="false" />
+            <element signature="e#3454#4073#1" expanded="false" />
+            <element signature="e#4073#4805#1" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -564,9 +573,12 @@
         <state relative-caret-position="595">
           <caret line="35" column="23" lean-forward="true" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
           <folding>
-            <element signature="e#1675#2235#1" expanded="false" />
-            <element signature="e#2235#2721#1" expanded="false" />
-            <element signature="e#3547#4147#1" expanded="false" />
+            <element signature="e#1623#1911#1" expanded="false" />
+            <element signature="e#1911#2097#1" expanded="false" />
+            <element signature="e#2097#2284#1" expanded="false" />
+            <element signature="e#2642#3454#1" expanded="false" />
+            <element signature="e#3454#4073#1" expanded="false" />
+            <element signature="e#4073#4805#1" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -634,9 +646,12 @@
         <state relative-caret-position="731">
           <caret line="43" column="57" lean-forward="false" selection-start-line="43" selection-start-column="57" selection-end-line="43" selection-end-column="57" />
           <folding>
-            <element signature="e#1675#2235#1" expanded="false" />
-            <element signature="e#2235#2721#1" expanded="false" />
-            <element signature="e#3547#4147#1" expanded="false" />
+            <element signature="e#1623#1911#1" expanded="false" />
+            <element signature="e#1911#2097#1" expanded="false" />
+            <element signature="e#2097#2284#1" expanded="false" />
+            <element signature="e#2642#3454#1" expanded="false" />
+            <element signature="e#3454#4073#1" expanded="false" />
+            <element signature="e#4073#4805#1" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -690,14 +705,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/input.sj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="2" lean-forward="false" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grammar/Tl.g4">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -708,21 +715,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grammar/Test.g4">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="681">
+        <state relative-caret-position="1207">
           <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="79" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/input.sj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="2" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="2" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grammar/Sj.g4">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="96" column="16" lean-forward="false" selection-start-line="96" selection-start-column="16" selection-end-line="96" selection-end-column="16" />
+        <state relative-caret-position="314">
+          <caret line="150" column="0" lean-forward="false" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
           <folding>
-            <element signature="e#1675#2235#1" expanded="false" />
-            <element signature="e#2235#2721#1" expanded="false" />
-            <element signature="e#3547#4147#1" expanded="false" />
+            <element signature="e#1623#1911#1" expanded="false" />
+            <element signature="e#1911#2097#1" expanded="false" />
+            <element signature="e#2097#2284#1" expanded="false" />
+            <element signature="e#2642#3454#1" expanded="false" />
+            <element signature="e#3454#4073#1" expanded="false" />
+            <element signature="e#4073#4805#1" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grammar/Mu.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1565">
+          <caret line="117" column="5" lean-forward="true" selection-start-line="117" selection-start-column="5" selection-end-line="117" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
