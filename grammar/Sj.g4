@@ -75,17 +75,17 @@ idAtom          : '(' idAtom ')'
                 | identifier
                 ;
 intArthExpr     : '(' intArthExpr ')' #parenIntArthExpr
-                | intAtom               op=( '*' | '/' )    (  intArthExpr  | idAtom )              #multIntArthExpr
+                | intAtom               op=( '*' | '/' )    (  intArthExpr  | idAtom | intAtom )              #multIntArthExpr
                 | idAtom                op=( '*' | '/' )    (  intArthExpr  | intAtom )             #multIntArthExpr
                 | intArthExpr           op=( '*' | '/' )    (  intArthExpr  | idAtom | intAtom )    #multIntArthExpr
 
-                | intAtom               op=( '+' | '-' )    ( intArthExpr  | idAtom )               #addIntArthExpr
+                | intAtom               op=( '+' | '-' )    ( intArthExpr  | idAtom | intAtom )               #addIntArthExpr
                 | idAtom                op=( '+' | '-' )    ( intArthExpr  | intAtom )              #addIntArthExpr
                 | intArthExpr           op=( '+' | '-' )    ( intArthExpr  | idAtom | intAtom )     #addIntArthExpr
                 ;
 // int comparision expressions syntax
 intCompExpr     : '(' intCompExpr ')'
-                | intAtom               op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( idAtom | intCompExpr | intArthExpr )
+                | intAtom               op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( idAtom | intAtom | intCompExpr | intArthExpr )
                 | idAtom                op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( intAtom | intCompExpr | intArthExpr )
                 | intCompExpr           op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( idAtom | intAtom | intCompExpr | intArthExpr )
                 | intArthExpr           op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( idAtom | intAtom | intCompExpr | intArthExpr )
@@ -93,7 +93,7 @@ intCompExpr     : '(' intCompExpr ')'
 // int logical expressions syntax
 intLogicExpr    : '!' intLogicExpr
                 | '(' intLogicExpr ')'
-                | intAtom               op=( '&&' | '||' )    ( intLogicExpr | idAtom | intCompExpr | intArthExpr )
+                | intAtom               op=( '&&' | '||' )    ( intLogicExpr | idAtom | intAtom | intCompExpr | intArthExpr )
                 | idAtom                op=( '&&' | '||' )    ( intLogicExpr | intAtom | intCompExpr | intArthExpr )
                 | intLogicExpr          op=( '&&' | '||' )    ( intLogicExpr | idAtom | intAtom | intCompExpr | intArthExpr )
                 | intCompExpr           op=( '&&' | '||' )    ( intLogicExpr | idAtom | intAtom | intCompExpr | intArthExpr )
@@ -106,17 +106,17 @@ floatExpr       : floatArthExpr | floatCompExpr | floatLogicExpr
                 ;
 // float arithmetic expressions syntax
 floatArthExpr   : '(' floatArthExpr ')' #parenFloatArthExpr
-                | floatAtom               op=( '*' | '/' )    (  floatArthExpr  | idAtom )                  #multFloatArthExpr
+                | floatAtom               op=( '*' | '/' )    (  floatArthExpr  | floatAtom | idAtom )                  #multFloatArthExpr
                 | idAtom                  op=( '*' | '/' )    (  floatArthExpr  | floatAtom )               #multFloatArthExpr
                 | floatArthExpr           op=( '*' | '/' )    (  floatArthExpr  | floatAtom | idAtom )      #multFloatArthExpr
 
-                | floatAtom               op=( '+' | '-' )    (  floatArthExpr  | idAtom )                  #addFloatArthExpr
+                | floatAtom               op=( '+' | '-' )    (  floatArthExpr  | floatAtom | idAtom )                  #addFloatArthExpr
                 | idAtom                  op=( '+' | '-' )    (  floatArthExpr  | floatAtom )               #addFloatArthExpr
                 | floatArthExpr           op=( '+' | '-' )    (  floatArthExpr  | floatAtom | idAtom )      #addFloatArthExpr
                 ;
 // float comparision expressions syntax
 floatCompExpr   : '(' floatCompExpr ')'
-                | floatAtom               op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( idAtom | floatCompExpr | floatArthExpr )
+                | floatAtom               op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( floatAtom | idAtom | floatCompExpr | floatArthExpr )
                 | idAtom                  op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( floatAtom | floatCompExpr | floatArthExpr )
                 | floatCompExpr           op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( floatAtom | idAtom | floatCompExpr | floatArthExpr )
                 | floatArthExpr           op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( floatAtom | idAtom | floatCompExpr | floatArthExpr )
@@ -124,7 +124,7 @@ floatCompExpr   : '(' floatCompExpr ')'
 // int logical expressions syntax
 floatLogicExpr  : '!' floatLogicExpr
                 | '(' floatLogicExpr ')'
-                | floatAtom               op=( '&&' | '||' )    ( floatLogicExpr | idAtom | floatCompExpr | floatArthExpr )
+                | floatAtom               op=( '&&' | '||' )    ( floatLogicExpr | floatAtom | idAtom | floatCompExpr | floatArthExpr )
                 | idAtom                  op=( '&&' | '||' )    ( floatLogicExpr | floatAtom | floatCompExpr | floatArthExpr )
                 | floatLogicExpr          op=( '&&' | '||' )    ( floatLogicExpr | floatAtom | idAtom | floatCompExpr | floatArthExpr )
                 | floatCompExpr           op=( '&&' | '||' )    ( floatLogicExpr | floatAtom | idAtom | floatCompExpr | floatArthExpr )
