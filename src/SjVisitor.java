@@ -118,11 +118,19 @@ public interface SjVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVal(SjParser.ValContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SjParser#affectation}.
+	 * Visit a parse tree produced by the {@code exprAffect}
+	 * labeled alternative in {@link SjParser#affectation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAffectation(SjParser.AffectationContext ctx);
+	T visitExprAffect(SjParser.ExprAffectContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code valAffect}
+	 * labeled alternative in {@link SjParser#affectation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitValAffect(SjParser.ValAffectContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code identifierFunctionCall}
 	 * labeled alternative in {@link SjParser#functionCall}.

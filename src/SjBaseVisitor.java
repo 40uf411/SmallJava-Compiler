@@ -142,7 +142,14 @@ public class SjBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements SjV
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAffectation(SjParser.AffectationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExprAffect(SjParser.ExprAffectContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitValAffect(SjParser.ValAffectContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

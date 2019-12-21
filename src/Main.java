@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Main {
 
-    public static List<MyVisitor.Element> ids = new ArrayList<MyVisitor.Element>();
+    //public static List<MyVisitor.Element> ids = new ArrayList<MyVisitor.Element>();
 
     public static void main(String[] args) throws IOException {
         CharStream charStream = CharStreams.fromFileName("./input.sj");
@@ -20,10 +20,7 @@ public class Main {
         SjParser parser = new SjParser(new CommonTokenStream(lexer));
         ParseTree tree = parser.start();
         String answer = new MyVisitor().visit(tree);
-        ids = MyVisitor.ts;
+        //ids = MyVisitor.ts;
 
-//        for(int i = 0; i < ids.size(); i++) {
-//            System.out.println("#" + i +" id: " + ids.get(i).ident + " type: " + ids.get(i).type + " val: " + ids.get(i).val);
-//        }
     }
 }

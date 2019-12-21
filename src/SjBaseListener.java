@@ -231,13 +231,25 @@ public class SjBaseListener implements SjListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAffectation(SjParser.AffectationContext ctx) { }
+	@Override public void enterExprAffect(SjParser.ExprAffectContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAffectation(SjParser.AffectationContext ctx) { }
+	@Override public void exitExprAffect(SjParser.ExprAffectContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterValAffect(SjParser.ValAffectContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitValAffect(SjParser.ValAffectContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
