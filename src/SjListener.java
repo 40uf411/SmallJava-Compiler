@@ -187,29 +187,15 @@ public interface SjListener extends ParseTreeListener {
 	 */
 	void exitVal(SjParser.ValContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code exprAffect}
-	 * labeled alternative in {@link SjParser#affectation}.
+	 * Enter a parse tree produced by {@link SjParser#affectation}.
 	 * @param ctx the parse tree
 	 */
-	void enterExprAffect(SjParser.ExprAffectContext ctx);
+	void enterAffectation(SjParser.AffectationContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code exprAffect}
-	 * labeled alternative in {@link SjParser#affectation}.
+	 * Exit a parse tree produced by {@link SjParser#affectation}.
 	 * @param ctx the parse tree
 	 */
-	void exitExprAffect(SjParser.ExprAffectContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code valAffect}
-	 * labeled alternative in {@link SjParser#affectation}.
-	 * @param ctx the parse tree
-	 */
-	void enterValAffect(SjParser.ValAffectContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code valAffect}
-	 * labeled alternative in {@link SjParser#affectation}.
-	 * @param ctx the parse tree
-	 */
-	void exitValAffect(SjParser.ValAffectContext ctx);
+	void exitAffectation(SjParser.AffectationContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code identifierFunctionCall}
 	 * labeled alternative in {@link SjParser#functionCall}.

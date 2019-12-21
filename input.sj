@@ -3,6 +3,6 @@ public class test {
     int a,b,c,r;
     float s;
     main {
-        a = 5;
+        s = 5.5;
     }
 }

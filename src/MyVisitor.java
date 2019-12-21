@@ -8,13 +8,6 @@ public class MyVisitor extends SjBaseVisitor<String> {
     public static List<String> imports = new ArrayList<String>();
     public static List<String> errors = new ArrayList<String>();
 
-    public class Element {
-        public String ident; public String type; public Object val;
-        public Element(String id, String tp){ident = id; type =tp;}
-        @Override
-        public String toString() {return String.valueOf(this.val);}
-    }
-
     public static int elemExist(String v){
         for (int i = 0; i < ts.size(); i++) {
             if (ts.get(i).ident.equals(v))
@@ -35,6 +28,31 @@ public class MyVisitor extends SjBaseVisitor<String> {
     }
     private static void nl(){
         System.out.println();
+    }
+    public String[] treatVal(String s) {
+
+        char type = s.charAt(0);
+        String val = s.substring(1);
+        String[] rst = new String[2];
+        switch (type) {
+            case '0':
+                rst[0] = "int";
+                break;
+            case '1':
+                rst[0] = "float";
+                break;
+            case '2':
+                rst[0] = "string";
+        }
+        rst[1] = val;
+        return rst;
+    }
+
+    public class Element {
+        public String ident; public String type; public Object val;
+        public Element(String id, String tp){ident = id; type =tp;}
+        @Override
+        public String toString() {return String.valueOf(this.val);}
     }
 
     @Override
@@ -114,9 +132,10 @@ public class MyVisitor extends SjBaseVisitor<String> {
     }
 
     @Override
-    public String visitValAffect(SjParser.ValAffectContext ctx) {
+    public String visitAffectation(SjParser.AffectationContext ctx) {
+
         String id = String.valueOf( visit(ctx.identifier()) );
-        String[] tmp = treatVal(String.valueOf( visit(ctx.val()) ) );
+        String[] tmp = treatVal(visit(ctx.expression()));
 
         String type = tmp[0];
         String val  = tmp[1];
@@ -131,7 +150,7 @@ public class MyVisitor extends SjBaseVisitor<String> {
             Element el = ts.get(idEl);
             if ( ! el.type.equals(type))
             {
-                errors.add("variable with the name '" + id + "' was not declared.");
+                errors.add("Affecting a value of type '" + type + "' on the variable '" + el.ident + "' of type (" + el.type+").");
                 return "";
             }
             else
@@ -151,21 +170,25 @@ public class MyVisitor extends SjBaseVisitor<String> {
             return "2" + String.valueOf(ctx.STRING_VAL());
     }
 
-    public String[] treatVal(String s) {
-      char type = s.charAt(0);
-      String val = s.substring(1);
-      String[] rst = new String[2];
-      switch (type) {
-          case 0:
-              rst[0] = "int";
-              break;
-          case 1:
-              rst[0] = "float";
-              break;
-          case 2:
-              rst[0] = "string";
-      }
-      rst[1] = val;
-      return rst;
-    };
+    @Override
+    public String visitExpression(SjParser.ExpressionContext ctx) {
+        if (ctx.val() != null) {
+            return visit(ctx.val());
+        }
+        else if (ctx.identifier() != null) {
+            return visit(ctx.identifier());
+        }
+        else if (ctx.functionCall() != null) { //TODO
+            return visit(ctx.functionCall());
+        }
+        else if (ctx.intExpr() != null) { //TODO
+            return visit(ctx.intExpr());
+        }
+        else if (ctx.floatExpr() != null) {//TODO
+            return  visit(ctx.floatExpr());
+        }
+        else { //ctx.idExpr() //TODO
+            return visit(ctx.idExpr());
+        }
+    }
 }

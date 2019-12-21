@@ -34,8 +34,7 @@ ifCondition     : idLogicExpr | idCompExpr | intLogicExpr | intCompExpr | floatL
 bool            :  BOOL_T | BOOL_F ;
 val             : INTEGER_VAL | FLOAT_VAL | STRING_VAL ;
 // affectation syntax
-affectation     : identifier '=' expression #exprAffect
-                | identifier '=' val        #valAffect
+affectation     : identifier '=' expression
                 ;
 
 // function call syntax
@@ -45,7 +44,13 @@ functionCall    : function=identifier '(' exprList? ')' #identifierFunctionCall 
 exprList        : expression ( ',' expression )* ;
 
 // expression syntax
-expression      : functionCall | idExpr | intExpr | floatExpr | val | identifier;
+expression      : functionCall      //#exprFuncCallDispatch
+                | idExpr            //#idExprDispatch
+                | intExpr           //#intExprDispatch
+                | floatExpr         //#floatExprDispatch
+                | val               //#valDsipatch
+                | identifier        //#idDispatcher
+                ;
 
 idExpr          : idArthExpr | idCompExpr | idLogicExpr
                 ;
