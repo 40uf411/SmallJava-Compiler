@@ -4,7 +4,7 @@ start: imports modificator 'class' identifier '{' declarations  'main' '{' instr
 
 // importing libreries syntax (ex: import foo; import bar;...)
 imports : import_* ;
-import_ : ('import' identifier ';');
+import_ : ('import' identifier '.' identifier ';');
 
 // modificators syntax
 modificator : 'public'
@@ -18,7 +18,7 @@ declarations : ( declaration ';' )*;
 declaration  : type vars ;
 
 type         : INT | FLOAT | STRING;
-vars         : identifier ( ',' vars )* ;
+vars         : identifier ( ',' identifier )* ;
 
 // instuctions syntax
 instructions    : instruction *;
@@ -48,18 +48,18 @@ expression      : functionCall | idExpr | intExpr | floatExpr | val | identifier
 idExpr          : idArthExpr | idCompExpr | idLogicExpr
                 ;
 // id arithmetic expressions syntax
-idArthExpr      : '(' idArthExpr ')' #parenIdArthExpr
-                | identifier           op=( '*' | '/' )    identifier     #multIdArthExpr
-                | identifier           op=( '+' | '-' )    identifier     #addIdArthExpr
+idArthExpr      : '(' idArthExpr ')'                                                    #parenIdArthExpr
+                | left=identifier           op=( '*' | '/' )    right=identifier        #multIdArthExpr
+                | left=identifier           op=( '+' | '-' )    right=identifier        #addIdArthExpr
                 ;
 // id comparision expressions syntax
 idCompExpr      : '(' idCompExpr ')'
-                | identifier           op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    identifier
+                | left=identifier           op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    right=identifier
                 ;
 // id logical expressions syntax
-idLogicExpr     : '!' idLogicExpr
-                | '(' idLogicExpr ')'
-                | identifier           op=( '&&' | '||' )    identifier
+idLogicExpr     : '!' idLogicExpr                                                       #nIdLogicExpr
+                | '(' idLogicExpr ')'                                                   #parenIdLogicExpr
+                | left=identifier           op=( '&&' | '||' )    right=identifier      #opIdLogicExpr
                 ;
 // int expression syntax
 intExpr         : intArthExpr | intCompExpr | intLogicExpr
@@ -74,30 +74,30 @@ floatAtom       : '(' floatAtom ')'
 idAtom          : '(' idAtom ')'
                 | identifier
                 ;
-intArthExpr     : '(' intArthExpr ')' #parenIntArthExpr
-                | intAtom               op=( '*' | '/' )    (  intArthExpr  | idAtom | intAtom )              #multIntArthExpr
-                | idAtom                op=( '*' | '/' )    (  intArthExpr  | intAtom )             #multIntArthExpr
-                | intArthExpr           op=( '*' | '/' )    (  intArthExpr  | idAtom | intAtom )    #multIntArthExpr
+intArthExpr     : '(' intArthExpr ')'                                                                           #parenIntArthExpr
+                | intAtom               op=( '*' | '/' )    (  intArthExpr  | idAtom | intAtom )                #multIntArthExpr
+                | idAtom                op=( '*' | '/' )    (  intArthExpr  | intAtom )                         #multIntArthExpr
+                | intArthExpr           op=( '*' | '/' )    (  intArthExpr  | idAtom | intAtom )                #multIntArthExpr
 
-                | intAtom               op=( '+' | '-' )    ( intArthExpr  | idAtom | intAtom )               #addIntArthExpr
-                | idAtom                op=( '+' | '-' )    ( intArthExpr  | intAtom )              #addIntArthExpr
-                | intArthExpr           op=( '+' | '-' )    ( intArthExpr  | idAtom | intAtom )     #addIntArthExpr
+                | intAtom               op=( '+' | '-' )    ( intArthExpr  | idAtom | intAtom )                 #addIntArthExpr
+                | idAtom                op=( '+' | '-' )    ( intArthExpr  | intAtom )                          #addIntArthExpr
+                | intArthExpr           op=( '+' | '-' )    ( intArthExpr  | idAtom | intAtom )                 #addIntArthExpr
                 ;
 // int comparision expressions syntax
-intCompExpr     : '(' intCompExpr ')'
-                | intAtom               op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( idAtom | intAtom | intCompExpr | intArthExpr )
-                | idAtom                op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( intAtom | intCompExpr | intArthExpr )
-                | intCompExpr           op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( idAtom | intAtom | intCompExpr | intArthExpr )
-                | intArthExpr           op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( idAtom | intAtom | intCompExpr | intArthExpr )
+intCompExpr     : '(' intCompExpr ')'                                                                                                       #parenIntCompExpr
+                | intAtom               op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( idAtom | intAtom | intCompExpr | intArthExpr )    #intIntCompExpr
+                | idAtom                op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( intAtom | intCompExpr | intArthExpr )             #idIntCompExpr
+                | intCompExpr           op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( idAtom | intAtom | intCompExpr | intArthExpr )    #intCompExpr2
+                | intArthExpr           op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( idAtom | intAtom | intCompExpr | intArthExpr )    #intArthExpr2
                 ;
 // int logical expressions syntax
-intLogicExpr    : '!' intLogicExpr
-                | '(' intLogicExpr ')'
-                | intAtom               op=( '&&' | '||' )    ( intLogicExpr | idAtom | intAtom | intCompExpr | intArthExpr )
-                | idAtom                op=( '&&' | '||' )    ( intLogicExpr | intAtom | intCompExpr | intArthExpr )
-                | intLogicExpr          op=( '&&' | '||' )    ( intLogicExpr | idAtom | intAtom | intCompExpr | intArthExpr )
-                | intCompExpr           op=( '&&' | '||' )    ( intLogicExpr | idAtom | intAtom | intCompExpr | intArthExpr )
-                | intArthExpr           op=( '&&' | '||' )    ( intLogicExpr | idAtom | intAtom | intCompExpr | intArthExpr )
+intLogicExpr    : '!' intLogicExpr                                                                                                          #nIntLogicExpr
+                | '(' intLogicExpr ')'                                                                                                      #parenIntLogicExpr
+                | intAtom               op=( '&&' | '||' )    ( intLogicExpr | idAtom | intAtom | intCompExpr | intArthExpr )               #intAtomIntLogicExpr
+                | idAtom                op=( '&&' | '||' )    ( intLogicExpr | intAtom | intCompExpr | intArthExpr )                        #idAtomintLogicExpr
+                | intLogicExpr          op=( '&&' | '||' )    ( intLogicExpr | idAtom | intAtom | intCompExpr | intArthExpr )               #intLogicExpr2
+                | intCompExpr           op=( '&&' | '||' )    ( intLogicExpr | idAtom | intAtom | intCompExpr | intArthExpr )               #intCompExprIntLogicExpr
+                | intArthExpr           op=( '&&' | '||' )    ( intLogicExpr | idAtom | intAtom | intCompExpr | intArthExpr )               #intArthExprIntLogicExpr
                 ;
 
 // float expression syntax

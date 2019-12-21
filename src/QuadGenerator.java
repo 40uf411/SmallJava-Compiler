@@ -1,6 +1,4 @@
-
-
-public class QuadGenerator extends TlBaseVisitor<Integer> {
+public class QuadGenerator extends SjBaseVisitor<Integer> {
 
     private Quads quads = new Quads();
 
@@ -10,7 +8,7 @@ public class QuadGenerator extends TlBaseVisitor<Integer> {
     }
 
     @Override
-    public Integer visitStart(TlParser.StartContext ctx) {
+    public Integer visitStart(SjParser.StartContext ctx) {
 
         quads.addQuad("END","","","");
         showText("generated quads: ",TextDisplayer.COMPILERTEXTS);
