@@ -1,4 +1,4 @@
-// Generated from C:/Users/ali25/SmallJava/grammar\Sj.g4 by ANTLR 4.7.2
+// Generated from C:/Users/a/Desktop/code-source/GIT repositories/Other/SmallJava-Compiler/grammar\Sj.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -46,16 +46,6 @@ public interface SjListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitModificator(SjParser.ModificatorContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SjParser#identifier}.
-	 * @param ctx the parse tree
-	 */
-	void enterIdentifier(SjParser.IdentifierContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SjParser#identifier}.
-	 * @param ctx the parse tree
-	 */
-	void exitIdentifier(SjParser.IdentifierContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SjParser#declarations}.
 	 * @param ctx the parse tree
@@ -157,36 +147,6 @@ public interface SjListener extends ParseTreeListener {
 	 */
 	void exitElseStat(SjParser.ElseStatContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SjParser#ifCondition}.
-	 * @param ctx the parse tree
-	 */
-	void enterIfCondition(SjParser.IfConditionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SjParser#ifCondition}.
-	 * @param ctx the parse tree
-	 */
-	void exitIfCondition(SjParser.IfConditionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SjParser#bool}.
-	 * @param ctx the parse tree
-	 */
-	void enterBool(SjParser.BoolContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SjParser#bool}.
-	 * @param ctx the parse tree
-	 */
-	void exitBool(SjParser.BoolContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SjParser#val}.
-	 * @param ctx the parse tree
-	 */
-	void enterVal(SjParser.ValContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SjParser#val}.
-	 * @param ctx the parse tree
-	 */
-	void exitVal(SjParser.ValContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link SjParser#affectation}.
 	 * @param ctx the parse tree
 	 */
@@ -197,17 +157,17 @@ public interface SjListener extends ParseTreeListener {
 	 */
 	void exitAffectation(SjParser.AffectationContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code identifierFunctionCall}
+	 * Enter a parse tree produced by the {@code idFunctionCall}
 	 * labeled alternative in {@link SjParser#functionCall}.
 	 * @param ctx the parse tree
 	 */
-	void enterIdentifierFunctionCall(SjParser.IdentifierFunctionCallContext ctx);
+	void enterIdFunctionCall(SjParser.IdFunctionCallContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code identifierFunctionCall}
+	 * Exit a parse tree produced by the {@code idFunctionCall}
 	 * labeled alternative in {@link SjParser#functionCall}.
 	 * @param ctx the parse tree
 	 */
-	void exitIdentifierFunctionCall(SjParser.IdentifierFunctionCallContext ctx);
+	void exitIdFunctionCall(SjParser.IdFunctionCallContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SjParser#exprList}.
 	 * @param ctx the parse tree
@@ -219,391 +179,119 @@ public interface SjListener extends ParseTreeListener {
 	 */
 	void exitExprList(SjParser.ExprListContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SjParser#expression}.
+	 * Enter a parse tree produced by the {@code opExprLogic}
+	 * labeled alternative in {@link SjParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpression(SjParser.ExpressionContext ctx);
+	void enterOpExprLogic(SjParser.OpExprLogicContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SjParser#expression}.
+	 * Exit a parse tree produced by the {@code opExprLogic}
+	 * labeled alternative in {@link SjParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpression(SjParser.ExpressionContext ctx);
+	void exitOpExprLogic(SjParser.OpExprLogicContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SjParser#idExpr}.
+	 * Enter a parse tree produced by the {@code opAndOrlogic}
+	 * labeled alternative in {@link SjParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterOpAndOrlogic(SjParser.OpAndOrlogicContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code opAndOrlogic}
+	 * labeled alternative in {@link SjParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitOpAndOrlogic(SjParser.OpAndOrlogicContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code parentExpr}
+	 * labeled alternative in {@link SjParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterParentExpr(SjParser.ParentExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code parentExpr}
+	 * labeled alternative in {@link SjParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitParentExpr(SjParser.ParentExprContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code opNotlogic}
+	 * labeled alternative in {@link SjParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterOpNotlogic(SjParser.OpNotlogicContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code opNotlogic}
+	 * labeled alternative in {@link SjParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitOpNotlogic(SjParser.OpNotlogicContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code multExpr}
+	 * labeled alternative in {@link SjParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterMultExpr(SjParser.MultExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code multExpr}
+	 * labeled alternative in {@link SjParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitMultExpr(SjParser.MultExprContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code valExpr}
+	 * labeled alternative in {@link SjParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterValExpr(SjParser.ValExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code valExpr}
+	 * labeled alternative in {@link SjParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitValExpr(SjParser.ValExprContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code plusExpr}
+	 * labeled alternative in {@link SjParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterPlusExpr(SjParser.PlusExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code plusExpr}
+	 * labeled alternative in {@link SjParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitPlusExpr(SjParser.PlusExprContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code idExpr}
+	 * labeled alternative in {@link SjParser#expr}.
 	 * @param ctx the parse tree
 	 */
 	void enterIdExpr(SjParser.IdExprContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SjParser#idExpr}.
+	 * Exit a parse tree produced by the {@code idExpr}
+	 * labeled alternative in {@link SjParser#expr}.
 	 * @param ctx the parse tree
 	 */
 	void exitIdExpr(SjParser.IdExprContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code parenIdArthExpr}
-	 * labeled alternative in {@link SjParser#idArthExpr}.
+	 * Enter a parse tree produced by {@link SjParser#val}.
 	 * @param ctx the parse tree
 	 */
-	void enterParenIdArthExpr(SjParser.ParenIdArthExprContext ctx);
+	void enterVal(SjParser.ValContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code parenIdArthExpr}
-	 * labeled alternative in {@link SjParser#idArthExpr}.
+	 * Exit a parse tree produced by {@link SjParser#val}.
 	 * @param ctx the parse tree
 	 */
-	void exitParenIdArthExpr(SjParser.ParenIdArthExprContext ctx);
+	void exitVal(SjParser.ValContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code multIdArthExpr}
-	 * labeled alternative in {@link SjParser#idArthExpr}.
+	 * Enter a parse tree produced by {@link SjParser#identifier}.
 	 * @param ctx the parse tree
 	 */
-	void enterMultIdArthExpr(SjParser.MultIdArthExprContext ctx);
+	void enterIdentifier(SjParser.IdentifierContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code multIdArthExpr}
-	 * labeled alternative in {@link SjParser#idArthExpr}.
+	 * Exit a parse tree produced by {@link SjParser#identifier}.
 	 * @param ctx the parse tree
 	 */
-	void exitMultIdArthExpr(SjParser.MultIdArthExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code addIdArthExpr}
-	 * labeled alternative in {@link SjParser#idArthExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterAddIdArthExpr(SjParser.AddIdArthExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code addIdArthExpr}
-	 * labeled alternative in {@link SjParser#idArthExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitAddIdArthExpr(SjParser.AddIdArthExprContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SjParser#idCompExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterIdCompExpr(SjParser.IdCompExprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SjParser#idCompExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitIdCompExpr(SjParser.IdCompExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code nIdLogicExpr}
-	 * labeled alternative in {@link SjParser#idLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterNIdLogicExpr(SjParser.NIdLogicExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code nIdLogicExpr}
-	 * labeled alternative in {@link SjParser#idLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitNIdLogicExpr(SjParser.NIdLogicExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code parenIdLogicExpr}
-	 * labeled alternative in {@link SjParser#idLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterParenIdLogicExpr(SjParser.ParenIdLogicExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code parenIdLogicExpr}
-	 * labeled alternative in {@link SjParser#idLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitParenIdLogicExpr(SjParser.ParenIdLogicExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code opIdLogicExpr}
-	 * labeled alternative in {@link SjParser#idLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterOpIdLogicExpr(SjParser.OpIdLogicExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code opIdLogicExpr}
-	 * labeled alternative in {@link SjParser#idLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitOpIdLogicExpr(SjParser.OpIdLogicExprContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SjParser#intExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterIntExpr(SjParser.IntExprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SjParser#intExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitIntExpr(SjParser.IntExprContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SjParser#intAtom}.
-	 * @param ctx the parse tree
-	 */
-	void enterIntAtom(SjParser.IntAtomContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SjParser#intAtom}.
-	 * @param ctx the parse tree
-	 */
-	void exitIntAtom(SjParser.IntAtomContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SjParser#floatAtom}.
-	 * @param ctx the parse tree
-	 */
-	void enterFloatAtom(SjParser.FloatAtomContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SjParser#floatAtom}.
-	 * @param ctx the parse tree
-	 */
-	void exitFloatAtom(SjParser.FloatAtomContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SjParser#idAtom}.
-	 * @param ctx the parse tree
-	 */
-	void enterIdAtom(SjParser.IdAtomContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SjParser#idAtom}.
-	 * @param ctx the parse tree
-	 */
-	void exitIdAtom(SjParser.IdAtomContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code parenIntArthExpr}
-	 * labeled alternative in {@link SjParser#intArthExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterParenIntArthExpr(SjParser.ParenIntArthExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code parenIntArthExpr}
-	 * labeled alternative in {@link SjParser#intArthExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitParenIntArthExpr(SjParser.ParenIntArthExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code addIntArthExpr}
-	 * labeled alternative in {@link SjParser#intArthExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterAddIntArthExpr(SjParser.AddIntArthExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code addIntArthExpr}
-	 * labeled alternative in {@link SjParser#intArthExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitAddIntArthExpr(SjParser.AddIntArthExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code multIntArthExpr}
-	 * labeled alternative in {@link SjParser#intArthExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterMultIntArthExpr(SjParser.MultIntArthExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code multIntArthExpr}
-	 * labeled alternative in {@link SjParser#intArthExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitMultIntArthExpr(SjParser.MultIntArthExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code idIntCompExpr}
-	 * labeled alternative in {@link SjParser#intCompExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterIdIntCompExpr(SjParser.IdIntCompExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code idIntCompExpr}
-	 * labeled alternative in {@link SjParser#intCompExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitIdIntCompExpr(SjParser.IdIntCompExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code intCompExpr2}
-	 * labeled alternative in {@link SjParser#intCompExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterIntCompExpr2(SjParser.IntCompExpr2Context ctx);
-	/**
-	 * Exit a parse tree produced by the {@code intCompExpr2}
-	 * labeled alternative in {@link SjParser#intCompExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitIntCompExpr2(SjParser.IntCompExpr2Context ctx);
-	/**
-	 * Enter a parse tree produced by the {@code intArthExpr2}
-	 * labeled alternative in {@link SjParser#intCompExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterIntArthExpr2(SjParser.IntArthExpr2Context ctx);
-	/**
-	 * Exit a parse tree produced by the {@code intArthExpr2}
-	 * labeled alternative in {@link SjParser#intCompExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitIntArthExpr2(SjParser.IntArthExpr2Context ctx);
-	/**
-	 * Enter a parse tree produced by the {@code parenIntCompExpr}
-	 * labeled alternative in {@link SjParser#intCompExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterParenIntCompExpr(SjParser.ParenIntCompExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code parenIntCompExpr}
-	 * labeled alternative in {@link SjParser#intCompExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitParenIntCompExpr(SjParser.ParenIntCompExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code intIntCompExpr}
-	 * labeled alternative in {@link SjParser#intCompExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterIntIntCompExpr(SjParser.IntIntCompExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code intIntCompExpr}
-	 * labeled alternative in {@link SjParser#intCompExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitIntIntCompExpr(SjParser.IntIntCompExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code nIntLogicExpr}
-	 * labeled alternative in {@link SjParser#intLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterNIntLogicExpr(SjParser.NIntLogicExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code nIntLogicExpr}
-	 * labeled alternative in {@link SjParser#intLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitNIntLogicExpr(SjParser.NIntLogicExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code intLogicExpr2}
-	 * labeled alternative in {@link SjParser#intLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterIntLogicExpr2(SjParser.IntLogicExpr2Context ctx);
-	/**
-	 * Exit a parse tree produced by the {@code intLogicExpr2}
-	 * labeled alternative in {@link SjParser#intLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitIntLogicExpr2(SjParser.IntLogicExpr2Context ctx);
-	/**
-	 * Enter a parse tree produced by the {@code idAtomintLogicExpr}
-	 * labeled alternative in {@link SjParser#intLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterIdAtomintLogicExpr(SjParser.IdAtomintLogicExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code idAtomintLogicExpr}
-	 * labeled alternative in {@link SjParser#intLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitIdAtomintLogicExpr(SjParser.IdAtomintLogicExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code intAtomIntLogicExpr}
-	 * labeled alternative in {@link SjParser#intLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterIntAtomIntLogicExpr(SjParser.IntAtomIntLogicExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code intAtomIntLogicExpr}
-	 * labeled alternative in {@link SjParser#intLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitIntAtomIntLogicExpr(SjParser.IntAtomIntLogicExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code intCompExprIntLogicExpr}
-	 * labeled alternative in {@link SjParser#intLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterIntCompExprIntLogicExpr(SjParser.IntCompExprIntLogicExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code intCompExprIntLogicExpr}
-	 * labeled alternative in {@link SjParser#intLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitIntCompExprIntLogicExpr(SjParser.IntCompExprIntLogicExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code intArthExprIntLogicExpr}
-	 * labeled alternative in {@link SjParser#intLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterIntArthExprIntLogicExpr(SjParser.IntArthExprIntLogicExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code intArthExprIntLogicExpr}
-	 * labeled alternative in {@link SjParser#intLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitIntArthExprIntLogicExpr(SjParser.IntArthExprIntLogicExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code parenIntLogicExpr}
-	 * labeled alternative in {@link SjParser#intLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterParenIntLogicExpr(SjParser.ParenIntLogicExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code parenIntLogicExpr}
-	 * labeled alternative in {@link SjParser#intLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitParenIntLogicExpr(SjParser.ParenIntLogicExprContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SjParser#floatExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterFloatExpr(SjParser.FloatExprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SjParser#floatExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitFloatExpr(SjParser.FloatExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code multFloatArthExpr}
-	 * labeled alternative in {@link SjParser#floatArthExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterMultFloatArthExpr(SjParser.MultFloatArthExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code multFloatArthExpr}
-	 * labeled alternative in {@link SjParser#floatArthExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitMultFloatArthExpr(SjParser.MultFloatArthExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code addFloatArthExpr}
-	 * labeled alternative in {@link SjParser#floatArthExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterAddFloatArthExpr(SjParser.AddFloatArthExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code addFloatArthExpr}
-	 * labeled alternative in {@link SjParser#floatArthExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitAddFloatArthExpr(SjParser.AddFloatArthExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code parenFloatArthExpr}
-	 * labeled alternative in {@link SjParser#floatArthExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterParenFloatArthExpr(SjParser.ParenFloatArthExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code parenFloatArthExpr}
-	 * labeled alternative in {@link SjParser#floatArthExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitParenFloatArthExpr(SjParser.ParenFloatArthExprContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SjParser#floatCompExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterFloatCompExpr(SjParser.FloatCompExprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SjParser#floatCompExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitFloatCompExpr(SjParser.FloatCompExprContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SjParser#floatLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterFloatLogicExpr(SjParser.FloatLogicExprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SjParser#floatLogicExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitFloatLogicExpr(SjParser.FloatLogicExprContext ctx);
+	void exitIdentifier(SjParser.IdentifierContext ctx);
 }
