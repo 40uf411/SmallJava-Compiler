@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="129a88ce-5226-4d04-b019-4163d5f32f69" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/grammar/Sj.g4" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/Sj.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input.sj" beforeDir="false" afterPath="$PROJECT_DIR$/input.sj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Sj.interp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sj.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Sj.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sj.tokens" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SjBaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SjBaseListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SjBaseVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SjBaseVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SjLexer.interp" beforeDir="false" afterPath="$PROJECT_DIR$/src/SjLexer.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SjLexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SjLexer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SjLexer.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/src/SjLexer.tokens" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SjListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SjListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SjParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SjParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SjVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SjVisitor.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,11 +34,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MyVisitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="997">
-              <caret line="210" column="16" selection-start-line="210" selection-start-column="16" selection-end-line="210" selection-end-column="16" />
+            <state relative-caret-position="-2150">
+              <caret line="210" selection-start-line="210" selection-end-line="210" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#499#500#0" expanded="true" />
@@ -67,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grammar/Sj.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="317">
+              <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
             </state>
           </provider>
         </entry>
@@ -149,8 +134,8 @@
         <option value="$USER_HOME$/Tiny/src/MyVisitor.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/input.sj" />
-        <option value="$PROJECT_DIR$/grammar/Sj.g4" />
         <option value="$PROJECT_DIR$/src/MyVisitor.java" />
+        <option value="$PROJECT_DIR$/grammar/Sj.g4" />
       </list>
     </option>
   </component>
@@ -206,7 +191,7 @@
     <property name="$PROJECT_DIR$/grammar/Sj.g4::/gen-listener" value="true" />
     <property name="$PROJECT_DIR$/grammar/Sj.g4::/gen-visitor" value="true" />
     <property name="$PROJECT_DIR$/grammar/Sj.g4::/output-dir" value="C:\Users\a\Desktop\code-source\GIT repositories\Other\SmallJava-Compiler\src" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1577404449737" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1577405445265" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -433,17 +418,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grammar/Sj.g4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/MyVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="997">
-          <caret line="210" column="16" selection-start-line="210" selection-start-column="16" selection-end-line="210" selection-end-column="16" />
+        <state relative-caret-position="-2150">
+          <caret line="210" selection-start-line="210" selection-end-line="210" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#499#500#0" expanded="true" />
@@ -453,6 +431,13 @@
             <element signature="e#11339#11340#0" expanded="true" />
             <element signature="e#11391#11392#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grammar/Sj.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
         </state>
       </provider>
     </entry>

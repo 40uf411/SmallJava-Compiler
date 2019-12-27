@@ -208,7 +208,7 @@ public class MyVisitor extends SjBaseVisitor<String> {
             case '*':
                 return;
             case '/':
-                
+
             default:
                 throw new RuntimeException("unknown operator: " + MuParser.tokenNames[ctx.op.getType()]);
 

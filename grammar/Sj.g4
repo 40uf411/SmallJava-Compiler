@@ -19,7 +19,7 @@ declarations : ( declaration ';' )*;
 declaration  : type vars ;
 
 type         : INT | FLOAT | STRING;
-vars         : identifierdec ( ',' identifierdec )* ;
+vars         : identifier ( ',' identifier )* ;
 
 
 
@@ -69,7 +69,6 @@ val             : INTEGER_VAL | FLOAT_VAL | STRING_VAL ;
 
 identifier: ID;
 
-identifierdec: ID;
 
 
 // data types
