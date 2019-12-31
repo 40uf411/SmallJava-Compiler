@@ -206,7 +206,7 @@ public class MyVisitor extends SjBaseVisitor<String> {
 
         switch (ctx.op.getType()) {
             case '*':
-                return;
+                return "";
             case '/':
 
             default:
