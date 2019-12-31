@@ -121,7 +121,7 @@ STRING  : 'string';
 ID : [a-zA-Z][a-zA-Z0-9]*;
 
 // data types syntax
-INTEGER_VAL : [+-]?[1-9][0-9]* ;
+INTEGER_VAL : [+-]?[0-9][0-9]* ;
 FLOAT_VAL   : INTEGER_VAL ('.'[0-9]*) ;
 STRING_VAL  : ["] ( ~["\r\n\\] | '\\' ~[\r\n] )* ["]
             | ['] ( ~['\r\n\\] | '\\' ~[\r\n] )* ['] ;

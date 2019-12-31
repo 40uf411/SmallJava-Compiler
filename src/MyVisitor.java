@@ -364,19 +364,66 @@ public class MyVisitor extends SjBaseVisitor<String> {
         }
     }
 
-    public int intType(String a)
-    {
-        switch (a){
-            case "int":
-                return 0;
-            case "float":
-                return 1;
-            case "String":
-                return 2;
-            default:
-                return -1;
+    @Override
+    public String visitMultArthExpr(SjParser.MultArthExprContext ctx) {
+        String[] left  = treatVal(visit(ctx.getChild(0)));
+        String[] right = treatVal(visit(ctx.getChild(2)));
+
+        String op = String.valueOf(ctx.getChild(1).getText());
+        String[] allowed_types = {"int", "float"};
+        if ( Arrays.asList(allowed_types).contains(left[0]) && left[0].equals(right[0]) ) { // '&& left[0].equals(right[0])' add this if u want to stop mixing types in operations
+
+            if (left[0].equals("int"))
+            {
+                int rslt = 0;
+                switch (op){
+                    case "/":
+                        if(Integer.valueOf(right[1]) == 0) {
+                            errors.add("division by 0");
+                            return "0";
+                        }
+                        rslt = (Integer.valueOf(left[1]) /  Integer.valueOf(right[1]));
+                        break;
+                    case "*":
+                        rslt = (Integer.valueOf(left[1]) *  Integer.valueOf(right[1]));
+                        break;
+                    default:
+                        System.out.println("error");
+                        break;
+                }
+                return String.valueOf("0" + rslt);
+            }
+            else
+            {
+                float rslt = 0;
+                switch (op){
+                    case "/":
+                        if(Float.valueOf(right[1]) == 0) {
+                            errors.add("division by 0");
+                            return "0";
+                        }
+                        rslt = (Float.valueOf(left[1]) /  Float.valueOf(right[1]));
+                        break;
+                    case "*":
+                        rslt = (Float.valueOf(left[1]) *  Float.valueOf(right[1]));
+                        break;
+                    default:
+                        System.out.println("error");
+                        break;
+                }
+                return String.valueOf("1" + rslt);
+            }
+        }
+        else
+        {
+            if( ! left[0].equals(right[0]))
+                errors.add("can't execute operation '" + op + "' on mismatched types");
+            else
+                errors.add("can't execute operation '" + op + "' on Strings.");
+            return " ";
         }
     }
+
     // IDENTIFIERS, VALUES, TYPES ######################################################################################
     @Override
     public String visitIntAtom(SjParser.IntAtomContext ctx) {
