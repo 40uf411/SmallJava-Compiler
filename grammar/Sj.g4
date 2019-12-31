@@ -84,6 +84,7 @@ compExpr        : '(' compExpr ')'                                              
 
 // int logical expressions syntax
 logicExpr       : '!' logicExpr                                                                                                 #notLogicExpr
+                | '!' idAtom                                                                                                    #notId
                 | '(' logicExpr ')'                                                                                             #parenLogicExpr
                 | numval                op=( '&' | '|' )    ( logicExpr | idAtom | numval | compExpr | arthExpr )               #opLogicExpr
                 | idAtom                op=( '&' | '|' )    ( logicExpr | idAtom | numval | compExpr | arthExpr )               #opLogicExpr
@@ -112,9 +113,9 @@ idAtom          : '(' idAtom ')'
 identifier: ID;
 
 // data types
-INT     : 'int_SJ';
-FLOAT   : 'float_SJ';
-STRING  : 'String_SJ';
+INT     : 'int';
+FLOAT   : 'float';
+STRING  : 'string';
 
 // ID syntaxs
 ID : [a-zA-Z][a-zA-Z0-9]*;

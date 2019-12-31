@@ -1,3 +1,4 @@
+import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import java.util.*;
 
@@ -9,9 +10,6 @@ public class MyVisitor extends SjBaseVisitor<String> {
         public String type;
         public Object val;
 
-        //public Integer intVal;
-        //public Double doubleVal;
-        //public String stringVal;
         public Element(String id, String tp){
             ident = id; type =tp;
         }
@@ -58,7 +56,10 @@ public class MyVisitor extends SjBaseVisitor<String> {
 
         char type = s.charAt(0);
         String val = s.substring(1);
+
         String[] rst = new String[2];
+        rst[0] = " ";
+        rst[1] = val;
         switch (type) {
             case '0':
                 rst[0] = "int";
@@ -68,8 +69,18 @@ public class MyVisitor extends SjBaseVisitor<String> {
                 break;
             case '2':
                 rst[0] = "string";
+            default: // in cas of an identifier
+                int id = elemExist(s);
+                if ( id != -1){
+                    Element e = ts.get(id);
+                    rst[0] = e.type;
+                    rst[1] = String.valueOf(e.val);
+                }
+                else {
+                    errors.add("using an undeclared variable '" + s + "'.");
+                }
+                break;
         }
-        rst[1] = val;
         return rst;
     }
 
@@ -77,16 +88,15 @@ public class MyVisitor extends SjBaseVisitor<String> {
     private static void nl(){
         System.out.println();
     }
+
     // Simplify printing text
     private static void showText(String text, int typeOfText) {
         TextDisplayer.getInstance().showText(text,typeOfText,TextDisplayer.SEMANTICERR);
     }
+
 // #####################################################################################################################
 
-
-
     // STARTING POINT ##################################################################################################
-
     @Override
     public String visitStart(SjParser.StartContext ctx) {
         visitChildren(ctx);
@@ -116,35 +126,34 @@ public class MyVisitor extends SjBaseVisitor<String> {
         else
         {
             showText("program compiled with the following errors",TextDisplayer.COMPILERTEXTS);
-            for (int i = 0; i < errors.size(); i++) {
-                showText(errors.get(i),TextDisplayer.ERROR);
+            for (String e : errors) {
+                showText(e,TextDisplayer.ERROR);
             }
         }
-        return "";
+        return " ";
     }
 
 
 
     // IMPORT STATEMENTS ###############################################################################################
-
     @Override
     public String visitImport_(SjParser.Import_Context ctx) {
 
-        String left = String.valueOf( visit(ctx.identifier(0)) );
-        String right = String.valueOf( visit(ctx.identifier(1)));
+        String left = String.valueOf( ctx.ID(0) );
+        String right = String.valueOf( ctx.ID(1) );
         String fname = left + "." + right;
         if ( imported(fname) )
         {
             errors.add("Package with the name '" + fname + "' already imported.");
-            return "";
+            return " ";
         }
         else
             imports.add( fname );
-        return "";
+        return " ";
     }
 
-    // DECLARATION STATEMENTS ##########################################################################################
 
+    // DECLARATION STATEMENTS ##########################################################################################
     @Override
     public String visitDeclaration(SjParser.DeclarationContext ctx) {
         String type = String.valueOf( visit(ctx.type()) );
@@ -153,7 +162,7 @@ public class MyVisitor extends SjBaseVisitor<String> {
             if ( elemExist( tokenNode.getText() ) != -1 )
             {
                 errors.add("variable with the name '" + tokenNode.getText() + "' already declared.");
-                return "";
+                return " ";
             }
             else
                 ts.add( new Element( tokenNode.getText(), type ) );
@@ -161,8 +170,8 @@ public class MyVisitor extends SjBaseVisitor<String> {
         return "ok";
     }
 
-    // AFFECTATION STATEMENTS ##########################################################################################
 
+    // AFFECTATION STATEMENTS ##########################################################################################
     @Override
     public String visitAffectation(SjParser.AffectationContext ctx) {
 
@@ -176,69 +185,68 @@ public class MyVisitor extends SjBaseVisitor<String> {
         if ( idEl == -1  )
         {
             errors.add("variable with the name '" + id + "' was not declared.");
-            return "";
+            return " ";
         }
         else {
             Element el = ts.get(idEl);
             if ( ! el.type.equals(type))
             {
                 errors.add("Affecting a value of type '" + type + "' on the variable '" + el.ident + "' of type (" + el.type+").");
-                return "";
+                return " ";
             }
             else
                 el.val = val;
         }
-        return "";
+        return " ";
     }
 
     // IF STATEMENTS ###################################################################################################
     @Override public String visitIfStatement(SjParser.IfStatementContext ctx) { return visitChildren(ctx); }
 
 
-    // EXPRESSIONS STATEMANTS ##########################################################################################
-
-    @Override public String visitParentExpr(SjParser.ParentExprContext ctx) { return visitChildren(ctx); }
+     // EXPRESSIONS STATEMANTS ##########################################################################################
 
 
-    @Override public String visitMultExpr(SjParser.MultExprContext ctx) {
-        String left = this.visit(ctx.expr(0));
-        String right = this.visit(ctx.expr(1));
 
-        switch (ctx.op.getType()) {
-            case '*':
-                return "";
-            case '/':
-
-            default:
-                throw new RuntimeException("unknown operator: " + MuParser.tokenNames[ctx.op.getType()]);
-
-
-                int idElLeft = elemExist(left);
-                int idElRight = elemExist(right);
-
-                if (idElLeft == -1) {
-                    errors.add("variable with the name '" + left + "' was not declared.");
-                    return "";
-                } else {
-                    Element ElLeft = ts.get(idElLeft);
-                    if (idElRight == -1) {
-                        errors.add("variable with the name '" + right + "' was not declared.");
-                        return "";
-                    } else {
-                        Element ElRight = ts.get(idElRight);
-                        switch (ctx.op.getText()) {
-                            case "*":
-                                if (ElLeft.type == "int") {
-
-                                }
-                                return "";
-
-                        }
-                    }
-                }
-                return visitChildren(ctx);
-        }
-    }
+//    @Override public String visitMultExpr(SjParser.MultExprContext ctx) {
+//        String left = this.visit(ctx.expr(0));
+//        String right = this.visit(ctx.expr(1));
+//
+//        switch (ctx.op.getType()) {
+//            case '*':
+//                return " ";
+//            case '/':
+//
+//            default:
+//                throw new RuntimeException("unknown operator: " + MuParser.tokenNames[ctx.op.getType()]);
+//
+//
+//                int idElLeft = elemExist(left);
+//                int idElRight = elemExist(right);
+//
+//                if (idElLeft == -1) {
+//                    errors.add("variable with the name '" + left + "' was not declared.");
+//                    return " ";
+//                } else {
+//                    Element ElLeft = ts.get(idElLeft);
+//                    if (idElRight == -1) {
+//                        errors.add("variable with the name '" + right + "' was not declared.");
+//                        return " ";
+//                    } else {
+//                        Element ElRight = ts.get(idElRight);
+//                        switch (ctx.op.getText()) {
+//                            case "*":
+//                                if (ElLeft.type == "int") {
+//
+//                                }
+//                                return " ";
+//
+//                        }
+//                    }
+//                }
+//                return visitChildren(ctx);
+//        }
+//    }
     /*
 
     @Override
@@ -279,12 +287,12 @@ public class MyVisitor extends SjBaseVisitor<String> {
 
         if (idElLeft == -1) {
             errors.add("variable with the name '" + left + "' was not declared.");
-            return "";
+            return " ";
         } else {
             Element ElLeft = ts.get(idElLeft);
             if (idElRight == -1) {
                 errors.add("variable with the name '" + right + "' was not declared.");
-                return "";
+                return " ";
             } else {
                 Element ElRight = ts.get(idElRight);
                 switch (ctx.op.getText()) {
@@ -292,36 +300,113 @@ public class MyVisitor extends SjBaseVisitor<String> {
                         if (ElLeft.type == "int") {
 
                         }
-                        return "";
+                        return " ";
 
                 }
             }
         }
-        return "";
+        return " ";
 
     }
     */
+    // EXPRESSIONS #####################################################################################################
 
-
-    // IDENTIFIERS, VALUES, TYPES ######################################################################################
 
     @Override
-    public String visitVal(SjParser.ValContext ctx) {
-        //String rs;
-        if (ctx.INTEGER_VAL() != null)
-            return "0" + ctx.INTEGER_VAL();
-        else if (ctx.FLOAT_VAL() != null)
-            return "1" + ctx.FLOAT_VAL();
+    public String visitAddArthExpr(SjParser.AddArthExprContext ctx) {
+        String[] left  = treatVal(visit(ctx.getChild(0)));
+        String[] right = treatVal(visit(ctx.getChild(2)));
+
+        String op = String.valueOf(ctx.getChild(1).getText());
+        String[] allowed_types = {"int", "float"};
+        if ( Arrays.asList(allowed_types).contains(left[0]) && left[0].equals(right[0]) ) { // '&& left[0].equals(right[0])' add this if u want to stop mixing types in operations
+
+            if (left[0].equals("int"))
+            {
+                int rslt = 0;
+                switch (op){
+                    case "+":
+                        rslt = (Integer.valueOf(left[1]) +  Integer.valueOf(right[1]));
+                        break;
+                    case "-":
+                        rslt = (Integer.valueOf(left[1]) -  Integer.valueOf(right[1]));
+                        break;
+                    default:
+                        System.out.println("error");
+                        break;
+                }
+                return String.valueOf("0" + rslt);
+            }
+            else
+            {
+                float rslt = 0;
+                switch (op){
+                    case "+":
+                        rslt = (Float.valueOf(left[1]) +  Float.valueOf(right[1]));
+                        break;
+                    case "-":
+                        rslt = (Float.valueOf(left[1]) -  Float.valueOf(right[1]));
+                        break;
+                    default:
+                        System.out.println("error");
+                        break;
+                }
+                return String.valueOf("1" + rslt);
+            }
+        }
         else
-            return "2" + ctx.STRING_VAL();
+        {
+            if( ! left[0].equals(right[0]))
+                errors.add("can't execute operation '" + op + "' on mismatched types");
+            else
+                errors.add("can't execute operation '" + op + "' on Strings.");
+            return " ";
+        }
     }
 
+    public int intType(String a)
+    {
+        switch (a){
+            case "int":
+                return 0;
+            case "float":
+                return 1;
+            case "String":
+                return 2;
+            default:
+                return -1;
+        }
+    }
+    // IDENTIFIERS, VALUES, TYPES ######################################################################################
+    @Override
+    public String visitIntAtom(SjParser.IntAtomContext ctx) {
+        if (ctx.INTEGER_VAL() != null)
+            return "0" + ctx.INTEGER_VAL();
+        else
+            return visit(ctx.intAtom());
+    }
+
+    @Override
+    public String visitFloatAtom(SjParser.FloatAtomContext ctx) {
+        if (ctx.FLOAT_VAL() != null)
+            return "1" + ctx.FLOAT_VAL();
+        else
+            return visit(ctx.floatAtom());
+    }
+
+    @Override
+    public String visitStringAtom(SjParser.StringAtomContext ctx) {
+        if (ctx.STRING_val() != null)
+            return "2" + ctx.STRING_val();
+        else
+            return visit(ctx.stringAtom());
+    }
 
     @Override
     public String visitIdentifier(SjParser.IdentifierContext ctx) {
-
         return String.valueOf(ctx.ID());
     }
+
     @Override
     public String visitType(SjParser.TypeContext ctx) {
         return String.valueOf(ctx.getText());
