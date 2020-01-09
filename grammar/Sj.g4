@@ -46,57 +46,39 @@ affectation     : identifier '=' expr
 
 
 // function call syntax ################################################################################################
-functionCall    : ('Out_SJ' | 'In_SJ') '('  STRING_VAL  ',' exprList? ')' #idFunctionCall ;
-
+functionCall    : functionType '('  stringAtom  (',' exprList)? ')' #idFunctionCall ;
+functionType: 'Out_SJ' | 'In_SJ';
 
 // list of expressions syntax (function call)
 exprList        : expr ( ',' expr )* ;
 // expression syntax (affectation, exprList) ###########################################################################
-//expr1            :'(' expr ')'                                           #parentExpr
-//                | left=expr op=('*'|'/') right=expr                     #multExpr
-//                | left=expr op=('+'|'-') right=expr                     #plusExpr
-//                | left=expr op=('>'|'<'|'='|'<='|'>='|'!=') right=expr  #opExprLogic
-//                | op='!' right=expr                                     #opNotlogic
-//                | left=expr op=('&' | '||') right=expr                  #opAndOrlogic
-//                | identifier                                            #idExpr
-//                | val                                                   #valExpr
-//                ;
-
-expr            : arthExpr | compExpr | logicExpr | val | identifier;
-
-// id arithmetic expressions syntax
-arthExpr        : '(' arthExpr ')'                                                                          #parenArthExpr
-                | numval                op=( '*' | '/' )    (  arthExpr  | idAtom | numval )                #multArthExpr
-                | idAtom                op=( '*' | '/' )    (  arthExpr  | idAtom | numval )                #multArthExpr
-                | arthExpr              op=( '*' | '/' )    (  arthExpr  | idAtom | numval )                #multArthExpr
-
-                | numval                op=( '+' | '-' )    ( arthExpr  | idAtom | numval )                 #addArthExpr
-                | idAtom                op=( '+' | '-' )    (  arthExpr  | idAtom | numval )                #addArthExpr
-                | arthExpr              op=( '+' | '-' )    ( arthExpr  | idAtom | numval )                 #addArthExpr
+expr            :'(' expr ')'                                           #parentExpr
+                | left=expr op=('*'|'/') right=expr                     #arthExpr
+                | left=expr op=('+'|'-') right=expr                     #arthExpr
+                | atom                                                  #arthExpr
                 ;
+
+//expr            : arthExpr | compExpr | logicExpr | val | identifier;
+
 // int comparision expressions syntax
-compExpr        : '(' compExpr ')'                                                                                                   #parenCompExpr
-                | numval                op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( idAtom | numval | compExpr | arthExpr )    #opCompExpr
-                | idAtom                op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( idAtom | numval | compExpr | arthExpr )    #opCompExpr
-                | compExpr              op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( idAtom | numval | compExpr | arthExpr )    #opCompExpr
-                | arthExpr              op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    ( idAtom | numval | compExpr | arthExpr )    #opCompExpr
+compExpr        : '(' compExpr ')'                                                                  #parenCompExpr
+                | left=compExpr  op=( '>' | '>=' | '==' | '!=' | '<=' | '<' )    right=compExpr     #opCompExpr
+                | expr                                                                              #atomCompExpr
                 ;
 
 // int logical expressions syntax
-logicExpr       : '!' logicExpr                                                                                                 #notLogicExpr
-                | '!' idAtom                                                                                                    #notId
-                | '(' logicExpr ')'                                                                                             #parenLogicExpr
-                | numval                op=( '&' | '|' )    ( logicExpr | idAtom | numval | compExpr | arthExpr )               #opLogicExpr
-                | idAtom                op=( '&' | '|' )    ( logicExpr | idAtom | numval | compExpr | arthExpr )               #opLogicExpr
-                | logicExpr             op=( '&' | '|' )    ( logicExpr | idAtom | numval | compExpr | arthExpr )               #opLogicExpr
-                | compExpr              op=( '&' | '|' )    ( logicExpr | idAtom | numval | compExpr | arthExpr )               #opLogicExpr
-                | arthExpr              op=( '&' | '|' )    ( logicExpr | idAtom | numval | compExpr | arthExpr )               #opLogicExpr
+logicExpr       : '(' logicExpr ')'                                                   #parenLogicExpr
+                |'!' logicExpr                                                        #notLogicExpr
+                | left=logicExpr   op=( '&' | '|' )   left=logicExpr              #opLogicExpr
+                | compExpr                                                            #atomLogic
                 ;
 
 
+atom:           idAtom
+                |intAtom
+                |floatAtom
+                ;
 
-val             : numval | stringAtom ;
-numval          : intAtom | floatAtom;
 
 intAtom         : '(' intAtom ')'
                 | INTEGER_VAL
@@ -105,7 +87,7 @@ floatAtom       : '(' floatAtom ')'
                 | FLOAT_VAL
                 ;
 stringAtom      : '(' stringAtom ')'
-                | STRING_val
+                | STRING_VAL
                 ;
 idAtom          : '(' idAtom ')'
                 | identifier
