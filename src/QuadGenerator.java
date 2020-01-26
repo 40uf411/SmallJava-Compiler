@@ -1,5 +1,9 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class QuadGenerator extends SjBaseVisitor<Integer> {
 
+    public static List<Element> tsSystem = Main.tsSystem;
     private Quads quads = Main.quads;
 
     private void showText(String text, int typeOfText)

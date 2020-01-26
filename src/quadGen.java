@@ -4,7 +4,7 @@ import java.util.List;
 
 public class quadGen extends SjBaseVisitor<String> {
 
-    public static List<Element> tsSystem = new ArrayList<>();
+
 
     public static int elemExist(String v){
         for (int i = 0; i < ts.size(); i++) {
