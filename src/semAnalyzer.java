@@ -5,25 +5,11 @@ import java.util.*;
 public class semAnalyzer extends SjBaseVisitor<String> {
 
     // One Element of symbols table CLASS ##############################################################################
-    public class Element {
-        public String ident;
-        public String type;
-        public Object val;
 
-        public Element(String id, String tp){
-            ident = id; type =tp;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(this.val);
-        }
-    }
 
 // needed variables ####################################################################################################
 
     public static List<Element> ts = new ArrayList<>();
-    public static List<Element> tsSystem = new ArrayList<>();
     public static Iterator<Element> itrt = ts.iterator();
     public static List<String> imports = new ArrayList<>();
     public static List<String> errors = new ArrayList<>();
@@ -40,13 +26,7 @@ public class semAnalyzer extends SjBaseVisitor<String> {
         return -1;
     }
 
-    public static int elemExistSystem(String v){
-        for (int i = 0; i < ts.size(); i++) {
-            if (tsSystem.get(i).ident.equals(v))
-                return i;
-        }
-        return -1;
-    }
+
 
     // look if an element already been imported
     public static boolean imported(String v){
@@ -223,50 +203,6 @@ public class semAnalyzer extends SjBaseVisitor<String> {
      // EXPRESSIONS STATEMANTS ##########################################################################################
 
 
-
-//    @Override public String visitMultExpr(SjParser.MultExprContext ctx) {
-//        String left = this.visit(ctx.expr(0));
-//        String right = this.visit(ctx.expr(1));
-//
-//        switch (ctx.op.getType()) {
-//            case '*':
-//                return " ";
-//            case '/':
-//
-//            default:
-//                throw new RuntimeException("unknown operator: " + MuParser.tokenNames[ctx.op.getType()]);
-//
-//
-//                int idElLeft = elemExist(left);
-//                int idElRight = elemExist(right);
-//
-//                if (idElLeft == -1) {
-//                    errors.add("variable with the name '" + left + "' was not declared.");
-//                    return " ";
-//                } else {
-//                    Element ElLeft = ts.get(idElLeft);
-//                    if (idElRight == -1) {
-//                        errors.add("variable with the name '" + right + "' was not declared.");
-//                        return " ";
-//                    } else {
-//                        Element ElRight = ts.get(idElRight);
-//                        switch (ctx.op.getText()) {
-//                            case "*":
-//                                if (ElLeft.type == "int") {
-//
-//                                }
-//                                return " ";
-//
-//                        }
-//                    }
-//                }
-//                return visitChildren(ctx);
-//        }
-//    }
-
-    // EXPRESSIONS #####################################################################################################
-
-
     @Override
     public String visitArthExpr(SjParser.ArthExprContext ctx) {
         String l = visit(ctx.left);
@@ -327,76 +263,6 @@ public class semAnalyzer extends SjBaseVisitor<String> {
         }
 
     }
-
-    /*@Override
-    public String visitMultArthExpr(SjParser.MultArthExprContext ctx) {
-        String l = visit(ctx.getChild(0));
-        String r = visit(ctx.getChild(2));
-        String[] left  = treatVal(l);
-        String[] right = treatVal(r);
-        String op = String.valueOf(ctx.getChild(1).getText());
-        Quad quad = new Quad(op, l, r, null);
-
-        String[] allowed_types = {"int", "float"};
-        if ( Arrays.asList(allowed_types).contains(left[0]) && left[0].equals(right[0]) ) { // '&& left[0].equals(right[0])' add this if u want to stop mixing types in operations
-
-            if (left[0].equals("int"))
-            {
-                tsSystem.add(new Element(quad.res, left[0]));
-
-                int rslt = 0;
-                switch (op){
-                    case "/":
-                        if(Integer.valueOf(right[1]) == 0) {
-                            errors.add("division by 0");
-                            return "0";
-                        }
-                        rslt = (Integer.valueOf(left[1]) /  Integer.valueOf(right[1]));
-                        break;
-                    case "*":
-                        rslt = (Integer.valueOf(left[1]) *  Integer.valueOf(right[1]));
-                        break;
-                    default:
-                        System.out.println("error");
-                        break;
-                }
-                return String.valueOf("0" + rslt);
-            }
-            else
-            {
-                tsSystem.add(new Element(quad.res, left[0]));
-
-                float rslt = 0;
-                switch (op){
-                    case "/":
-                        if(Float.valueOf(right[1]) == 0) {
-                            errors.add("division by 0");
-                            return "0";
-                        }
-                        rslt = (Float.valueOf(left[1]) /  Float.valueOf(right[1]));
-                        break;
-                    case "*":
-                        rslt = (Float.valueOf(left[1]) *  Float.valueOf(right[1]));
-                        break;
-                    default:
-                        System.out.println("error");
-                        break;
-                }
-                return String.valueOf("1" + rslt);
-            }
-        }
-        else
-        {
-            if( ! left[0].equals(right[0]))
-                errors.add("can't execute operation '" + op + "' on mismatched types");
-            else
-                errors.add("can't execute operation '" + op + "' on Strings.");
-            return "";
-        }
-    }*/
-
-
-
 
     @Override public String visitOpCompExpr(SjParser.OpCompExprContext ctx) {
         String[] left  = treatVal(visit(ctx.getChild(0)));
