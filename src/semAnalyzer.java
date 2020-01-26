@@ -134,6 +134,7 @@ public class semAnalyzer extends SjBaseVisitor<String> {
     // IMPORT STATEMENTS ###############################################################################################
     @Override
     public String visitImport_(SjParser.Import_Context ctx) {
+
         String left = String.valueOf( ctx.ID(0) );
         String right = String.valueOf( ctx.ID(1) );
         String fname = left + "." + right;
