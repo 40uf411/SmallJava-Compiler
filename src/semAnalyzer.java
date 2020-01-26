@@ -265,10 +265,6 @@ public class semAnalyzer extends SjBaseVisitor<String> {
         }
     }
 
-
-
-
-
     @Override public String visitOpCompExpr(SjParser.OpCompExprContext ctx) {
         String[] left  = treatVal(visit(ctx.getChild(0)));
         String[] right = treatVal(visit(ctx.getChild(2)));
@@ -324,18 +320,7 @@ public class semAnalyzer extends SjBaseVisitor<String> {
         String[] right  = treatVal(visit(ctx.getChild(1)));
         if (right[1].equals("true")) {return "2" + "false";} else {return "2" + "true";}
     }
-    /*
-    @Override public String visitNotId(SjParser.NotIdContext ctx) {
-        String[] right  = treatVal(visit(ctx.getChild(1)));
-        if (right[0].equals("int") || right[0].equals("float")) {
-            // every value is equal to true except 0
-            if ( !Float.valueOf(right[1]).equals(0.0) ) {return "2" + "true";} else {return "2" + "false";}
-        } else {
-            // if it's a string it's automatically true
-            return "2" + "true";
-        }
-    }
-    */
+
     @Override public String visitOpLogicExpr(SjParser.OpLogicExprContext ctx) {
         String[] left  = treatVal(visit(ctx.getChild(0)));
         String[] right = treatVal(visit(ctx.getChild(2)));
