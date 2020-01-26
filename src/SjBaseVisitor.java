@@ -1,4 +1,4 @@
-// Generated from C:/Users/a/Desktop/code source/SmallJava-azikiou/grammar\Sj.g4 by ANTLR 4.7.2
+// Generated from C:/Users/a/Desktop/code-source/GIT repositories/Other/SmallJava-Compiler/grammar\Sj.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -157,6 +157,13 @@ public class SjBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements SjV
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitExprList(SjParser.ExprListContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitAtomExpr(SjParser.AtomExprContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -1,4 +1,4 @@
-// Generated from C:/Users/a/Desktop/code source/SmallJava-azikiou/grammar\Sj.g4 by ANTLR 4.7.2
+// Generated from C:/Users/a/Desktop/code-source/GIT repositories/Other/SmallJava-Compiler/grammar\Sj.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -224,6 +224,18 @@ public interface SjListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExprList(SjParser.ExprListContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code atomExpr}
+	 * labeled alternative in {@link SjParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterAtomExpr(SjParser.AtomExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code atomExpr}
+	 * labeled alternative in {@link SjParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitAtomExpr(SjParser.AtomExprContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code parentExpr}
 	 * labeled alternative in {@link SjParser#expr}.

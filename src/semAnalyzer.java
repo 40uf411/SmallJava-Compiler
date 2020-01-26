@@ -9,9 +9,9 @@ public class semAnalyzer extends SjBaseVisitor<String> {
 
 // needed variables ####################################################################################################
 
-    public static List<Element> ts = new ArrayList<>();
-    public static List<String> imports = new ArrayList<>();
-    public static List<String> errors = new ArrayList<>();
+    public static List<Element> ts = Main.ts;
+    public static List<String> imports = Main.imports;
+    public static List<String> errors = Main.errors;
 
 
 // helper functions ####################################################################################################
@@ -264,7 +264,9 @@ public class semAnalyzer extends SjBaseVisitor<String> {
         }
     }
 
-
+    @Override public String visitAtomExpr(SjParser.AtomExprContext ctx) {
+        return visitChildren(ctx);
+    }
 
 
 

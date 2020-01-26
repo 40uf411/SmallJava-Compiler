@@ -1,4 +1,4 @@
-// Generated from C:/Users/a/Desktop/code source/SmallJava-azikiou/grammar\Sj.g4 by ANTLR 4.7.2
+// Generated from C:/Users/a/Desktop/code-source/GIT repositories/Other/SmallJava-Compiler/grammar\Sj.g4 by ANTLR 4.7.2
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -262,6 +262,18 @@ public class SjBaseListener implements SjListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExprList(SjParser.ExprListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAtomExpr(SjParser.AtomExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAtomExpr(SjParser.AtomExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

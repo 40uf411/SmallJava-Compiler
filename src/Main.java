@@ -13,6 +13,9 @@ import java.util.List;
 public class Main {
 
     //public static List<MyVisitor.Element> ids = new ArrayList<MyVisitor.Element>();
+    public static List<Element> ts = new ArrayList<>();
+    public static List<String> imports = new ArrayList<>();
+    public static List<String> errors = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         CharStream charStream = CharStreams.fromFileName("./input.sj");
