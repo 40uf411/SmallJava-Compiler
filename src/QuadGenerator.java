@@ -4,6 +4,7 @@ import java.util.List;
 
 public class QuadGenerator extends SjBaseVisitor<String> {
 
+    public static List<Element> ts = Main.ts;
     public static List<Element> tsSystem = Main.tsSystem;
     public static List<Element> ts = Main.ts;
     private Quads quads = Main.quads;
@@ -11,6 +12,13 @@ public class QuadGenerator extends SjBaseVisitor<String> {
     public static int elemExistSystem(String v){
         for (int i = 0; i < tsSystem.size(); i++) {
             if (tsSystem.get(i).ident.equals(v))
+                return i;
+        }
+        return -1;
+    }
+    public static int elemExist(String v){
+        for (int i = 0; i < ts.size(); i++) {
+            if (ts.get(i).ident.equals(v))
                 return i;
         }
         return -1;
@@ -65,7 +73,6 @@ public class QuadGenerator extends SjBaseVisitor<String> {
         }
         return rst;
     }
-
     @Override
     public String visitStart(SjParser.StartContext ctx) {
 
@@ -82,11 +89,16 @@ public class QuadGenerator extends SjBaseVisitor<String> {
 
     @Override
     public String visitArthExpr(SjParser.ArthExprContext ctx) {
+        semAnalyzer.nl();
+
         String l = visit(ctx.left);
         String r = visit(ctx.right);
+
         String[] left  = treatVal(l);
         String[] right = treatVal(r);
+
         String op = String.valueOf(ctx.getChild(1).getText());
+
         Quad quad = new Quad(op, l, r, null);
         Quad.listQuad.add(quad);
 
@@ -95,6 +107,7 @@ public class QuadGenerator extends SjBaseVisitor<String> {
 
             if (left[0].equals("int"))
             {
+                semAnalyzer.nl();
                 tsSystem.add(new  Element(quad.res, left[0]));
 
                 int rslt = 0;
@@ -109,10 +122,13 @@ public class QuadGenerator extends SjBaseVisitor<String> {
                         System.out.println("error");
                         break;
                 }
+
                 return quad.res;
+
             }
             else
             {
+
                 tsSystem.add(new Element(quad.res, left[0]));
 
                 float rslt = 0;
@@ -129,6 +145,7 @@ public class QuadGenerator extends SjBaseVisitor<String> {
                 }
                 return quad.res;
             }
+
         }
 
         return quad.res;

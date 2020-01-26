@@ -140,6 +140,13 @@ public interface SjVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExprList(SjParser.ExprListContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code atomExpr}
+	 * labeled alternative in {@link SjParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAtomExpr(SjParser.AtomExprContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code parentExpr}
 	 * labeled alternative in {@link SjParser#expr}.
 	 * @param ctx the parse tree
