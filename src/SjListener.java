@@ -1,4 +1,4 @@
-// Generated from C:/Users/ali25/SmallJava/grammar\Sj.g4 by ANTLR 4.7.2
+// Generated from C:/Users/a/Desktop/code source/SmallJava-azikiou/grammar\Sj.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -205,6 +205,16 @@ public interface SjListener extends ParseTreeListener {
 	 */
 	void exitIdFunctionCall(SjParser.IdFunctionCallContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SjParser#functionType}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionType(SjParser.FunctionTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SjParser#functionType}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionType(SjParser.FunctionTypeContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SjParser#exprList}.
 	 * @param ctx the parse tree
 	 */
@@ -215,51 +225,29 @@ public interface SjListener extends ParseTreeListener {
 	 */
 	void exitExprList(SjParser.ExprListContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SjParser#expr}.
+	 * Enter a parse tree produced by the {@code parentExpr}
+	 * labeled alternative in {@link SjParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpr(SjParser.ExprContext ctx);
+	void enterParentExpr(SjParser.ParentExprContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SjParser#expr}.
+	 * Exit a parse tree produced by the {@code parentExpr}
+	 * labeled alternative in {@link SjParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpr(SjParser.ExprContext ctx);
+	void exitParentExpr(SjParser.ParentExprContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code addArthExpr}
-	 * labeled alternative in {@link SjParser#arthExpr}.
+	 * Enter a parse tree produced by the {@code arthExpr}
+	 * labeled alternative in {@link SjParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterAddArthExpr(SjParser.AddArthExprContext ctx);
+	void enterArthExpr(SjParser.ArthExprContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code addArthExpr}
-	 * labeled alternative in {@link SjParser#arthExpr}.
+	 * Exit a parse tree produced by the {@code arthExpr}
+	 * labeled alternative in {@link SjParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitAddArthExpr(SjParser.AddArthExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code multArthExpr}
-	 * labeled alternative in {@link SjParser#arthExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterMultArthExpr(SjParser.MultArthExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code multArthExpr}
-	 * labeled alternative in {@link SjParser#arthExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitMultArthExpr(SjParser.MultArthExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code parenArthExpr}
-	 * labeled alternative in {@link SjParser#arthExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterParenArthExpr(SjParser.ParenArthExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code parenArthExpr}
-	 * labeled alternative in {@link SjParser#arthExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitParenArthExpr(SjParser.ParenArthExprContext ctx);
+	void exitArthExpr(SjParser.ArthExprContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code opCompExpr}
 	 * labeled alternative in {@link SjParser#compExpr}.
@@ -284,6 +272,30 @@ public interface SjListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitParenCompExpr(SjParser.ParenCompExprContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code atomCompExpr}
+	 * labeled alternative in {@link SjParser#compExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterAtomCompExpr(SjParser.AtomCompExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code atomCompExpr}
+	 * labeled alternative in {@link SjParser#compExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitAtomCompExpr(SjParser.AtomCompExprContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code atomLogic}
+	 * labeled alternative in {@link SjParser#logicExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterAtomLogic(SjParser.AtomLogicContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code atomLogic}
+	 * labeled alternative in {@link SjParser#logicExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitAtomLogic(SjParser.AtomLogicContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code parenLogicExpr}
 	 * labeled alternative in {@link SjParser#logicExpr}.
@@ -321,37 +333,15 @@ public interface SjListener extends ParseTreeListener {
 	 */
 	void exitNotLogicExpr(SjParser.NotLogicExprContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code notId}
-	 * labeled alternative in {@link SjParser#logicExpr}.
+	 * Enter a parse tree produced by {@link SjParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void enterNotId(SjParser.NotIdContext ctx);
+	void enterAtom(SjParser.AtomContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code notId}
-	 * labeled alternative in {@link SjParser#logicExpr}.
+	 * Exit a parse tree produced by {@link SjParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void exitNotId(SjParser.NotIdContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SjParser#val}.
-	 * @param ctx the parse tree
-	 */
-	void enterVal(SjParser.ValContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SjParser#val}.
-	 * @param ctx the parse tree
-	 */
-	void exitVal(SjParser.ValContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SjParser#numval}.
-	 * @param ctx the parse tree
-	 */
-	void enterNumval(SjParser.NumvalContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SjParser#numval}.
-	 * @param ctx the parse tree
-	 */
-	void exitNumval(SjParser.NumvalContext ctx);
+	void exitAtom(SjParser.AtomContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SjParser#intAtom}.
 	 * @param ctx the parse tree

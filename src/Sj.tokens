@@ -41,7 +41,6 @@ BOOL_T=40
 BOOL_F=41
 COMMENT=42
 WS=43
-STRING_val=44
 'class_SJ'=1
 '{'=2
 'main_SJ'=3

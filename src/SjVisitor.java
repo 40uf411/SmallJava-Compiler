@@ -1,4 +1,4 @@
-// Generated from C:/Users/ali25/SmallJava/grammar\Sj.g4 by ANTLR 4.7.2
+// Generated from C:/Users/a/Desktop/code source/SmallJava-azikiou/grammar\Sj.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -128,38 +128,31 @@ public interface SjVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIdFunctionCall(SjParser.IdFunctionCallContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link SjParser#functionType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionType(SjParser.FunctionTypeContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link SjParser#exprList}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitExprList(SjParser.ExprListContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SjParser#expr}.
+	 * Visit a parse tree produced by the {@code parentExpr}
+	 * labeled alternative in {@link SjParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpr(SjParser.ExprContext ctx);
+	T visitParentExpr(SjParser.ParentExprContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code addArthExpr}
-	 * labeled alternative in {@link SjParser#arthExpr}.
+	 * Visit a parse tree produced by the {@code arthExpr}
+	 * labeled alternative in {@link SjParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAddArthExpr(SjParser.AddArthExprContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code multArthExpr}
-	 * labeled alternative in {@link SjParser#arthExpr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMultArthExpr(SjParser.MultArthExprContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code parenArthExpr}
-	 * labeled alternative in {@link SjParser#arthExpr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitParenArthExpr(SjParser.ParenArthExprContext ctx);
+	T visitArthExpr(SjParser.ArthExprContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code opCompExpr}
 	 * labeled alternative in {@link SjParser#compExpr}.
@@ -174,6 +167,20 @@ public interface SjVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitParenCompExpr(SjParser.ParenCompExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code atomCompExpr}
+	 * labeled alternative in {@link SjParser#compExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAtomCompExpr(SjParser.AtomCompExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code atomLogic}
+	 * labeled alternative in {@link SjParser#logicExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAtomLogic(SjParser.AtomLogicContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code parenLogicExpr}
 	 * labeled alternative in {@link SjParser#logicExpr}.
@@ -196,24 +203,11 @@ public interface SjVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNotLogicExpr(SjParser.NotLogicExprContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code notId}
-	 * labeled alternative in {@link SjParser#logicExpr}.
+	 * Visit a parse tree produced by {@link SjParser#atom}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNotId(SjParser.NotIdContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link SjParser#val}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVal(SjParser.ValContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link SjParser#numval}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNumval(SjParser.NumvalContext ctx);
+	T visitAtom(SjParser.AtomContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SjParser#intAtom}.
 	 * @param ctx the parse tree

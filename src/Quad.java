@@ -1,34 +1,20 @@
+import java.util.ArrayList;
 
 public class Quad
 {
-    String vals[];
+    public String op;
+    public String op1;
+    public String op2;
+    public String res;
+    public static int counter = 0;
+    public static ArrayList<Quad> listQuad = new ArrayList<>();
 
-    public Quad(String[] vals) {
-        this.vals = vals;
-    }
-
-    public Quad(String s1,String s2,String s3,String s4)
+    public Quad(String op,String op1,String op2,String res)
     {
-        vals = new String[4];
-        vals[0] = s1;
-        vals[1] = s2;
-        vals[2] = s3;
-        vals[3] = s4;
+        this.op = op;
+        this.op1 = op1;
+        this.op2 = op2;
+        this.res = res == null ? counter++ + "T": res;
     }
 
-    public String get(int index)
-    {
-        return vals[index];
-    }
-
-    public void set(int index, String s)
-    {
-        vals[index] = s;
-    }
-
-    @Override
-    public String toString()
-    {
-        return "("+vals[0]+","+vals[1]+","+vals[2]+","+vals[3]+")";
-    }
 }

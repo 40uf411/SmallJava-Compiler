@@ -19,8 +19,8 @@ public class Main {
         SjLexer lexer = new SjLexer(charStream);
         SjParser parser = new SjParser(new CommonTokenStream(lexer));
         ParseTree tree = parser.start();
-        String answer = new MyVisitor().visit(tree);
+        String answer = new semAnalyzer().visit(tree);
         //ids = MyVisitor.ts;
-
+            lexer = null;
     }
 }

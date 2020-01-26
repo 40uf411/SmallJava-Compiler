@@ -2,7 +2,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import java.util.*;
 
-public class MyVisitor extends SjBaseVisitor<String> {
+public class semAnalyzer extends SjBaseVisitor<String> {
 
     // One Element of symbols table CLASS ##############################################################################
     public class Element {
@@ -23,6 +23,7 @@ public class MyVisitor extends SjBaseVisitor<String> {
 // needed variables ####################################################################################################
 
     public static List<Element> ts = new ArrayList<>();
+    public static List<Element> tsSystem = new ArrayList<>();
     public static Iterator<Element> itrt = ts.iterator();
     public static List<String> imports = new ArrayList<>();
     public static List<String> errors = new ArrayList<>();
@@ -34,6 +35,14 @@ public class MyVisitor extends SjBaseVisitor<String> {
     public static int elemExist(String v){
         for (int i = 0; i < ts.size(); i++) {
             if (ts.get(i).ident.equals(v))
+                return i;
+        }
+        return -1;
+    }
+
+    public static int elemExistSystem(String v){
+        for (int i = 0; i < ts.size(); i++) {
+            if (tsSystem.get(i).ident.equals(v))
                 return i;
         }
         return -1;
@@ -53,12 +62,19 @@ public class MyVisitor extends SjBaseVisitor<String> {
 
     // returns an array contains type and value
     public String[] treatVal(String s) {
-
+        if (s.charAt(s.length()-1) == 'T' && s.charAt(0) <= '9' && s.charAt(0) >= '0') {
+            int id = elemExistSystem(s);
+            Element e = tsSystem.get(id);
+            String[] rst = new String[2];
+            rst[0] = e.type;
+            rst[1] = e.ident;
+            return rst;
+        }
         char type = s.charAt(0);
         String val = s.substring(1);
 
         String[] rst = new String[2];
-        rst[0] = " ";
+        rst[0] = "";
         rst[1] = val;
         switch (type) {
             case '0':
@@ -247,82 +263,27 @@ public class MyVisitor extends SjBaseVisitor<String> {
 //                return visitChildren(ctx);
 //        }
 //    }
-    /*
 
-    @Override
-    public String visitExpr(SjParser.ExprContext ctx) {
-        if (ctx.val() != null) {
-            return visit(ctx.val());
-        }
-        else if (ctx.identifier() != null) {
-            return visit(ctx.identifier());
-        }
-        else if (ctx.idExpr() != null) { //TODO
-            return visit(ctx.idExpr());
-        }
-        else if (ctx.intExpr() != null) { //TODO
-            return visit(ctx.intExpr());
-        }
-        else if (ctx.floatExpr() != null) {//TODO
-            return  visit(ctx.floatExpr());
-        }
-        else if (ctx.functionCall() != null) { //TODO
-            return visit(ctx.functionCall());
-        }
-        else { //ctx.idExpr() //TODO
-            return visit(ctx.idExpr());
-        }
-    }
-
-    // ID EXPRESSIONS ##################################################################################################
-
-    @Override public String visitParenIdArthExpr(SjParser.ParenIdArthExprContext ctx) { return visit(ctx.idArthExpr()); }
-
-    @Override public String visitMultIdArthExpr(SjParser.MultIdArthExprContext ctx) {
-        String left = this.visit(ctx.identifier(0));
-        String right = this.visit(ctx.identifier(1));
-
-        int idElLeft = elemExist( left );
-        int idElRight = elemExist( right );
-
-        if (idElLeft == -1) {
-            errors.add("variable with the name '" + left + "' was not declared.");
-            return " ";
-        } else {
-            Element ElLeft = ts.get(idElLeft);
-            if (idElRight == -1) {
-                errors.add("variable with the name '" + right + "' was not declared.");
-                return " ";
-            } else {
-                Element ElRight = ts.get(idElRight);
-                switch (ctx.op.getText()) {
-                    case "*":
-                        if (ElLeft.type == "int") {
-
-                        }
-                        return " ";
-
-                }
-            }
-        }
-        return " ";
-
-    }
-    */
     // EXPRESSIONS #####################################################################################################
 
 
     @Override
-    public String visitAddArthExpr(SjParser.AddArthExprContext ctx) {
-        String[] left  = treatVal(visit(ctx.getChild(0)));
-        String[] right = treatVal(visit(ctx.getChild(2)));
-
+    public String visitArthExpr(SjParser.ArthExprContext ctx) {
+        String l = visit(ctx.left);
+        String r = visit(ctx.right);
+        String[] left  = treatVal(l);
+        String[] right = treatVal(r);
         String op = String.valueOf(ctx.getChild(1).getText());
+        Quad quad = new Quad(op, l, r, null);
+        Quad.listQuad.add(quad);
+
         String[] allowed_types = {"int", "float"};
         if ( Arrays.asList(allowed_types).contains(left[0]) && left[0].equals(right[0]) ) { // '&& left[0].equals(right[0])' add this if u want to stop mixing types in operations
 
             if (left[0].equals("int"))
             {
+                tsSystem.add(new Element(quad.res, left[0]));
+
                 int rslt = 0;
                 switch (op){
                     case "+":
@@ -335,10 +296,12 @@ public class MyVisitor extends SjBaseVisitor<String> {
                         System.out.println("error");
                         break;
                 }
-                return String.valueOf("0" + rslt);
+                return quad.res;
             }
             else
             {
+                tsSystem.add(new Element(quad.res, left[0]));
+
                 float rslt = 0;
                 switch (op){
                     case "+":
@@ -351,7 +314,7 @@ public class MyVisitor extends SjBaseVisitor<String> {
                         System.out.println("error");
                         break;
                 }
-                return String.valueOf("1" + rslt);
+                return quad.res;
             }
         }
         else
@@ -360,21 +323,27 @@ public class MyVisitor extends SjBaseVisitor<String> {
                 errors.add("can't execute operation '" + op + "' on mismatched types");
             else
                 errors.add("can't execute operation '" + op + "' on Strings.");
-            return " ";
+            return "";
         }
+
     }
 
-    @Override
+    /*@Override
     public String visitMultArthExpr(SjParser.MultArthExprContext ctx) {
-        String[] left  = treatVal(visit(ctx.getChild(0)));
-        String[] right = treatVal(visit(ctx.getChild(2)));
-
+        String l = visit(ctx.getChild(0));
+        String r = visit(ctx.getChild(2));
+        String[] left  = treatVal(l);
+        String[] right = treatVal(r);
         String op = String.valueOf(ctx.getChild(1).getText());
+        Quad quad = new Quad(op, l, r, null);
+
         String[] allowed_types = {"int", "float"};
         if ( Arrays.asList(allowed_types).contains(left[0]) && left[0].equals(right[0]) ) { // '&& left[0].equals(right[0])' add this if u want to stop mixing types in operations
 
             if (left[0].equals("int"))
             {
+                tsSystem.add(new Element(quad.res, left[0]));
+
                 int rslt = 0;
                 switch (op){
                     case "/":
@@ -395,6 +364,8 @@ public class MyVisitor extends SjBaseVisitor<String> {
             }
             else
             {
+                tsSystem.add(new Element(quad.res, left[0]));
+
                 float rslt = 0;
                 switch (op){
                     case "/":
@@ -420,9 +391,113 @@ public class MyVisitor extends SjBaseVisitor<String> {
                 errors.add("can't execute operation '" + op + "' on mismatched types");
             else
                 errors.add("can't execute operation '" + op + "' on Strings.");
-            return " ";
+            return "";
+        }
+    }*/
+
+
+
+
+    @Override public String visitOpCompExpr(SjParser.OpCompExprContext ctx) {
+        String[] left  = treatVal(visit(ctx.getChild(0)));
+        String[] right = treatVal(visit(ctx.getChild(2)));
+
+        String op = String.valueOf(ctx.getChild(1).getText());
+        if ( !left[0].equals("string") && !right[0].equals("string")) {
+            String rslt = "";
+            switch (op){
+                case ">":
+                    if ( Float.valueOf(left[1]) > Float.valueOf(right[1])) {rslt = "true";} else {rslt = "false";}
+                    break;
+                case ">=":
+                    if ( Float.valueOf(left[1]) >= Float.valueOf(right[1])) {rslt = "true";} else {rslt = "false";}
+                    break;
+                case "==":
+                    if ( Float.valueOf(left[1]).equals(Float.valueOf(right[1])) ) {rslt = "true";} else {rslt = "false";}
+                    break;
+                case "!=":
+                    if ( !Float.valueOf(left[1]).equals(Float.valueOf(right[1])) ) {rslt = "true";} else {rslt = "false";}
+                    break;
+                case "<=":
+                    if ( Float.valueOf(left[1]) <= Float.valueOf(right[1])) {rslt = "true";} else {rslt = "false";}
+                    break;
+                case "<":
+                    if ( Float.valueOf(left[1]) < Float.valueOf(right[1])) {rslt = "true";} else {rslt = "false";}
+                    break;
+                default:
+                    errors.add("Operator" + op + "can't be applied here");
+                    break;
+            }
+            return "2" + rslt;
+        } else if (left[0].equals("string") && right[0].equals("string")) {
+            String rslt = "";
+            switch (op){
+                case "==":
+                    if ( String.valueOf(left[1]).equals(String.valueOf(right[1])) ) {rslt = "true";} else {rslt = "false";}
+                    break;
+                case "!=":
+                    if ( !String.valueOf(left[1]).equals(String.valueOf(right[1])) ) {rslt = "true";} else {rslt = "false";}
+                    break;
+                default:
+                    errors.add("Operator" + op + "can't be applied for strings");
+                    break;
+            }
+            return "2" + rslt;
+        } else {
+            errors.add("can't execute operation '" + op + "' on " + left[0] + "type and a" + right[0] + "type");
+        }
+        return "";
+    }
+
+    @Override public String visitNotLogicExpr(SjParser.NotLogicExprContext ctx) {
+        String[] right  = treatVal(visit(ctx.getChild(1)));
+        if (right[1].equals("true")) {return "2" + "false";} else {return "2" + "true";}
+    }
+    /*
+    @Override public String visitNotId(SjParser.NotIdContext ctx) {
+        String[] right  = treatVal(visit(ctx.getChild(1)));
+        if (right[0].equals("int") || right[0].equals("float")) {
+            // every value is equal to true except 0
+            if ( !Float.valueOf(right[1]).equals(0.0) ) {return "2" + "true";} else {return "2" + "false";}
+        } else {
+            // if it's a string it's automatically true
+            return "2" + "true";
         }
     }
+    */
+    @Override public String visitOpLogicExpr(SjParser.OpLogicExprContext ctx) {
+        String[] left  = treatVal(visit(ctx.getChild(0)));
+        String[] right = treatVal(visit(ctx.getChild(2)));
+
+        String op = String.valueOf(ctx.getChild(1).getText());
+        if (!left[0].equals("string")) {
+            // every value is equal to true except 0
+            if ( !Float.valueOf(left[1]).equals(0.0) ) {left[1] =  "true";} else {left[1] =  "false";}
+        }
+        if (!right[0].equals("string")) {
+            // every value is equal to true except 0
+            if ( !Float.valueOf(right[1]).equals(0.0) ) {right[1] =  "true";} else {right[1] =  "false";}
+        }
+
+        switch (op) {
+            case "|":
+                if (left[1].equals("true") || right[1].equals("true")) {return "2" + "true";} else {return "2" + "false";}
+            case "&":
+                if (left[1].equals("true") && right[1].equals("true")) {return "2" + "true";} else {return "2" + "false";}
+            default:
+                errors.add("Operator" + op + "can't be applied here");
+                break;
+        }
+        return "";
+    }
+
+    @Override public String visitIdFunctionCall(SjParser.IdFunctionCallContext ctx) {
+        String[] left  = treatVal(visit(ctx.getChild(0)));
+
+        return visitChildren(ctx);
+    }
+
+
 
     // IDENTIFIERS, VALUES, TYPES ######################################################################################
     @Override
@@ -443,8 +518,8 @@ public class MyVisitor extends SjBaseVisitor<String> {
 
     @Override
     public String visitStringAtom(SjParser.StringAtomContext ctx) {
-        if (ctx.STRING_val() != null)
-            return "2" + ctx.STRING_val();
+        if (ctx.STRING_VAL() != null)
+            return "2" + ctx.STRING_VAL();
         else
             return visit(ctx.stringAtom());
     }

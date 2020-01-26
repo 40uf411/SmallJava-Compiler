@@ -1,4 +1,4 @@
-// Generated from C:/Users/ali25/SmallJava/grammar\Sj.g4 by ANTLR 4.7.2
+// Generated from C:/Users/a/Desktop/code source/SmallJava-azikiou/grammar\Sj.g4 by ANTLR 4.7.2
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -243,6 +243,18 @@ public class SjBaseListener implements SjListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFunctionType(SjParser.FunctionTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionType(SjParser.FunctionTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterExprList(SjParser.ExprListContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -255,49 +267,25 @@ public class SjBaseListener implements SjListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpr(SjParser.ExprContext ctx) { }
+	@Override public void enterParentExpr(SjParser.ParentExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpr(SjParser.ExprContext ctx) { }
+	@Override public void exitParentExpr(SjParser.ParentExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAddArthExpr(SjParser.AddArthExprContext ctx) { }
+	@Override public void enterArthExpr(SjParser.ArthExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAddArthExpr(SjParser.AddArthExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterMultArthExpr(SjParser.MultArthExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitMultArthExpr(SjParser.MultArthExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterParenArthExpr(SjParser.ParenArthExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitParenArthExpr(SjParser.ParenArthExprContext ctx) { }
+	@Override public void exitArthExpr(SjParser.ArthExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -322,6 +310,30 @@ public class SjBaseListener implements SjListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitParenCompExpr(SjParser.ParenCompExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAtomCompExpr(SjParser.AtomCompExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAtomCompExpr(SjParser.AtomCompExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAtomLogic(SjParser.AtomLogicContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAtomLogic(SjParser.AtomLogicContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -363,37 +375,13 @@ public class SjBaseListener implements SjListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNotId(SjParser.NotIdContext ctx) { }
+	@Override public void enterAtom(SjParser.AtomContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNotId(SjParser.NotIdContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterVal(SjParser.ValContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitVal(SjParser.ValContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterNumval(SjParser.NumvalContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitNumval(SjParser.NumvalContext ctx) { }
+	@Override public void exitAtom(SjParser.AtomContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
