@@ -2,9 +2,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class QuadGenerator extends SjBaseVisitor<Integer> {
+public class QuadGenerator extends SjBaseVisitor<String> {
 
     public static List<Element> tsSystem = Main.tsSystem;
+    public static List<Element> ts = Main.ts;
     private Quads quads = Main.quads;
 
     public static int elemExistSystem(String v){
@@ -15,13 +16,58 @@ public class QuadGenerator extends SjBaseVisitor<Integer> {
         return -1;
     }
 
+    public static int elemExist(String v){
+        for (int i = 0; i < ts.size(); i++) {
+            if (ts.get(i).ident.equals(v))
+                return i;
+        }
+        return -1;
+    }
+
     private void showText(String text, int typeOfText)
     {
         TextDisplayer.getInstance().showText(text,typeOfText,TextDisplayer.QUADGEN);
     }
 
+    public String[] treatVal(String s) {
+        if (s.charAt(s.length()-1) == 'T' && s.charAt(0) <= '9' && s.charAt(0) >= '0') {
+            int id = elemExistSystem(s);
+            Element e = tsSystem.get(id);
+            String[] rst = new String[2];
+            rst[0] = e.type;
+            rst[1] = e.ident;
+            return rst;
+        }
+        char type = s.charAt(0);
+        String val = s.substring(1);
+
+        String[] rst = new String[2];
+        rst[0] = "";
+        rst[1] = val;
+        switch (type) {
+            case '0':
+                rst[0] = "int";
+                break;
+            case '1':
+                rst[0] = "float";
+                break;
+            case '2':
+                rst[0] = "string";
+            default: // in cas of an identifier
+                int id = elemExist(s);
+                if ( id != -1){
+                    Element e = ts.get(id);
+                    rst[0] = e.type;
+                    rst[1] = String.valueOf(e.val);
+                }
+
+                break;
+        }
+        return rst;
+    }
+
     @Override
-    public Integer visitStart(SjParser.StartContext ctx) {
+    public String visitStart(SjParser.StartContext ctx) {
 
         quads.addQuad("END","","","");
         showText("generated quads: ",TextDisplayer.COMPILERTEXTS);
