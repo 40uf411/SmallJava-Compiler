@@ -8,9 +8,17 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Main {
+
+    public static List<Element> ts = new ArrayList<>();
+    public static Iterator<Element> itrt = ts.iterator();
+    public static List<String> imports = new ArrayList<>();
+    public static List<String> errors = new ArrayList<>();
+
+    public static Quads quads = new Quads();
 
     //public static List<MyVisitor.Element> ids = new ArrayList<MyVisitor.Element>();
 

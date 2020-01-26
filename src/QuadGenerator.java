@@ -1,6 +1,6 @@
 public class QuadGenerator extends SjBaseVisitor<Integer> {
 
-    private Quads quads = new Quads();
+    private Quads quads = Main.quads;
 
     private void showText(String text, int typeOfText)
     {
