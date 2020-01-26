@@ -6,24 +6,9 @@ public class quadGen extends SjBaseVisitor<String> {
 
     public static List<Element> tsSystem = new ArrayList<>();
 
-    public static int elemExistSystem(String v){
-        for (int i = 0; i < tsSystem.size(); i++) {
-            if (tsSystem.get(i).ident.equals(v))
-                return i;
-        }
-        return -1;
-    }
 
-    public String[] treatVal(String s) {
-        if (s.charAt(s.length()-1) == 'T' && s.charAt(0) <= '9' && s.charAt(0) >= '0') {
-            int id = elemExistSystem(s);
-            Element e = tsSystem.get(id);
-            String[] rst = new String[2];
-            rst[0] = e.type;
-            rst[1] = e.ident;
-            return rst;
-        }
-    }
+
+
 
     public String visitArthExpr(SjParser.ArthExprContext ctx) {
         String l = visit(ctx.left);
