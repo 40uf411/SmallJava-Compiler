@@ -9,6 +9,5 @@ while n > 0 {
   else {
     log n + " -> odd";
   }
-
   n = n - 1;
 }
