@@ -73,7 +73,7 @@ public class semAnalyzer extends SjBaseVisitor<String> {
     }
 
     // New Line
-    private static void nl(){
+    public static void nl(){
         System.out.println();
     }
 

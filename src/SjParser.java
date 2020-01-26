@@ -1150,6 +1150,17 @@ public class SjParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
+	public static class AtomExprContext extends ExprContext {
+		public AtomContext atom() {
+			return getRuleContext(AtomContext.class,0);
+		}
+		public AtomExprContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof SjVisitor ) return ((SjVisitor<? extends T>)visitor).visitAtomExpr(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 	public static class ParentExprContext extends ExprContext {
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
@@ -1165,9 +1176,6 @@ public class SjParser extends Parser {
 		public ExprContext left;
 		public Token op;
 		public ExprContext right;
-		public AtomContext atom() {
-			return getRuleContext(AtomContext.class,0);
-		}
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
 		}
@@ -1217,7 +1225,7 @@ public class SjParser extends Parser {
 				break;
 			case 2:
 				{
-				_localctx = new ArthExprContext(_localctx);
+				_localctx = new AtomExprContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(182);
