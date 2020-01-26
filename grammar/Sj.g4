@@ -55,7 +55,7 @@ exprList        : expr ( ',' expr )* ;
 expr            :'(' expr ')'                                           #parentExpr
                 | left=expr op=('*'|'/') right=expr                     #arthExpr
                 | left=expr op=('+'|'-') right=expr                     #arthExpr
-                | atom                                                  #arthExpr
+                | atom                                                  #atomExpr
                 ;
 
 //expr            : arthExpr | compExpr | logicExpr | val | identifier;
