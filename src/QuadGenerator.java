@@ -14,6 +14,7 @@ public class QuadGenerator extends SjBaseVisitor<Integer> {
         }
         return -1;
     }
+
     private void showText(String text, int typeOfText)
     {
         TextDisplayer.getInstance().showText(text,typeOfText,TextDisplayer.QUADGEN);

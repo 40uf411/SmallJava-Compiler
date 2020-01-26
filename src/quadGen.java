@@ -4,24 +4,6 @@ import java.util.List;
 
 public class quadGen extends SjBaseVisitor<String> {
 
-
-
-    public static int elemExist(String v){
-        for (int i = 0; i < Main.ts.size(); i++) {
-            if (ts.get(i).ident.equals(v))
-                return i;
-        }
-        return -1;
-    }
-
-    public static int elemExistSystem(String v){
-        for (int i = 0; i < tsSystem.size(); i++) {
-            if (tsSystem.get(i).ident.equals(v))
-                return i;
-        }
-        return -1;
-    }
-
     public String[] treatVal(String s) {
         if (s.charAt(s.length()-1) == 'T' && s.charAt(0) <= '9' && s.charAt(0) >= '0') {
             int id = elemExistSystem(s);
