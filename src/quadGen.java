@@ -4,10 +4,12 @@ import java.util.List;
 
 public class quadGen extends SjBaseVisitor<String> {
 
-    public static List<Element> tsSystem = new ArrayList<>();
-
+    public static List<Element> tsSystem = Main.tsSystem;
+    public static List<Element> ts = Main.ts;
+    public static List<String> imports = Main.imports;
+    public static List<String> errors = Main.errors;
     public static int elemExist(String v){
-        for (int i = 0; i < ts.size(); i++) {
+        for (int i = 0; i < Main.ts.size(); i++) {
             if (ts.get(i).ident.equals(v))
                 return i;
         }

@@ -10,9 +10,9 @@ public class semAnalyzer extends SjBaseVisitor<String> {
 // needed variables ####################################################################################################
 
     public static List<Element> ts = Main.ts;
-    public static Iterator<Element> itrt = ts.iterator();
     public static List<String> imports = Main.imports;
     public static List<String> errors = Main.errors;
+    public static List<Element> tsSystem = new ArrayList<>();
 
 
 // helper functions ####################################################################################################
