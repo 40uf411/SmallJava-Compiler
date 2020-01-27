@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class QuadGenerator extends SjBaseVisitor<Integer> {
 
     public static List<Element> ts = Main.ts;
-    public static Iterator<Element> itrt = Main.itrt;
+    public static List<Element> tsSystem = Main.tsSystem;
     public static List<String> imports = Main.imports;
     public static List<String> errors = Main.errors;
 

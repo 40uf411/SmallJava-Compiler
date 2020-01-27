@@ -15,7 +15,7 @@ public class Main {
 
 
     public static List<Element> ts = new ArrayList<>();
-    public static Iterator<Element> itrt = ts.iterator();
+    public static List<Element> tsSystem = new ArrayList<>();
     public static List<String> imports = new ArrayList<>(   );
     public static List<String> errors = new ArrayList<>();
 
