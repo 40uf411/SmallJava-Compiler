@@ -1,0 +1,52 @@
+public class MyVisitor extends TlBaseVisitor<Integer> {
+
+    public boolean toBool(int v) {   return v > 0; }
+    @Override
+    public Integer visitStart(TlParser.StartContext ctx) {
+        return visitChildren(ctx);
+    }
+
+    @Override
+    public Integer visitOpExpr( TlParser.OpExprContext ctx) {
+        int left = visit(ctx.left);
+        int right = visit(ctx.right);
+        String op = ctx.op.getText();
+        switch (op.charAt(0)) {
+            case '*': return left * right;
+            case '/': return left / right;
+            case '+': return left + right;
+            case '-': return left - right;
+            default: throw new IllegalArgumentException("Unknown operator " + op);
+        }
+    }
+
+    @Override
+    public Integer visitOpStmt(TlParser.OpStmtContext ctx) {
+        int left = visit(ctx.left);
+        int right = visit(ctx.right);
+        String op = ctx.op.getText();
+        switch (op) {
+            case "==": return (left == right)? 1 : 0;
+            case "!=": return (left != right)? 1 : 0;
+            case "<=": return (left <= right)? 1 : 0;
+            case ">=": return (left >= right)? 1 : 0;
+            case "&&": return (toBool(left) && toBool(right))? 1 : 0;
+            case "||": return (toBool(left) || toBool(right))? 1 : 0;
+            default: throw new IllegalArgumentException("Unknown operator " + op);
+        }
+    }
+
+    @Override
+    public Integer visitAtomExpr( TlParser.AtomExprContext ctx) {
+        return Integer.valueOf(ctx.getText());
+    }
+
+    @Override
+    public Integer visitParenExpr( TlParser.ParenExprContext ctx) {
+        return this.visit(ctx.expr());
+    }
+    @Override
+    public Integer visitIntCondExpr( TlParser.IntCondStmtContext ctx) {
+        return Integer.valueOf(ctx.getText());
+    }
+}
